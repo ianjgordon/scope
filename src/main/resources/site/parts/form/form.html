@@ -1,217 +1,171 @@
-<div>
+<main role="main" id="main">
 
-	<!--<main role="main" id="main">-->
+	<div class="pure-g">
+		<div class="pure-u-1">
+			<div class="content">
 
-	<!--&lt;!&ndash; unique content of page goes here &ndash;&gt;-->
+				<!--LOGO-->
+				<a href="index.html" class="logolink"><img data-th-src="${portal.assetUrl({'_path=/images/logo.png'})}" alt="Mindful Monsters" class="pure-img logo"/></a>
 
-	<!--<div class="pure-g">-->
-	<!--<div class="pure-u-1">-->
-	<!--<div class="content">-->
-	<!--<a href="index.html" class="logolink"><img data-th-src="${portal.assetUrl({'_path=/images/logo.png'})}" alt="Mindful Monsters" class="pure-img logo"/></a>-->
-
-	<!--<div class="pure-g">-->
-	<!--<div class="pure-u-1">-->
-	<!--<div class="tlwrapper">-->
-	<!--<span class="labellike">Step: </span>-->
-	<!--<ul class="timeline">-->
-	<!--<li class="timeline-current">-->
-	<!--<span class="visually-hidden">Current: </span>-->
-	<!--<span><a href="stage1.html">1</a></span>-->
-	<!--</li>-->
-	<!--<li>-->
-	<!--<span><a href="stage2.html">2</a></span>-->
-	<!--</li>-->
-	<!--<li>-->
-	<!--<span><a href="stage3.html">3</a></span>-->
-	<!--</li>-->
-	<!--<li>-->
-	<!--<span><a href="stage4.html">4</a></span>-->
-	<!--</li>-->
-	<!--</ul>-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--</div>-->
-
-	<!--<div class="pure-g">-->
-	<!--<div class="pure-u-1 sparky">-->
-	<!--<h1 class="bubble">How would you like to donate?</h1>-->
-	<!--</div>-->
-
-	<!--<div class="pure-u-1">-->
-
-	<!--<div class="pure-g singlecardholder">-->
-	<!--<div class="pure-u-1">-->
-	<!--<div class="tab-interface">-->
-	<!--<ul role="tablist">-->
-	<!--<li role="presentation"><a href="#section1" tabindex="0" role="tab" aria-controls="section1" aria-selected="true">Monthly <span></span></a></li>-->
-	<!--<li role="presentation"><a href="#section2" tabindex="-1" role="tab" aria-controls="section2">Annually <span></span></a></li>-->
-	<!--</ul>-->
-	<!--<section id="section1" role="tabpanel">-->
-
-	<!--<div class="pure-g">-->
-	<!--<div class="pure-u-1">-->
-	<!--<p><b>Ongoing monthly donation of &pound;7.50</b></p>-->
-	<!--</div>-->
-	<!--<div class="pure-u-2-3">-->
-	<!--<ol class="group">-->
-	<!--<li>12 exciting deliveries of activity cards</li>-->
-	<!--<li>Postage and packaging included</li>-->
-	<!--<li>Donations are taken on the 1st of every month</li>-->
-	<!--<li class="bolder">Cancel at anytime</li>-->
-	<!--</ol>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1-3">-->
-	<!--<img data-th-src="${portal.assetUrl({'_path=/images/exampleCardsVertical.png'})}" alt="" class="pure-img"/>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1 promocode">-->
-	<!--<a href="#">Do you have a promotion code?</a>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1">-->
-	<!--<a href="stage2.html" class="buttonlike get-started">Donate monthly</a>-->
-	<!--</div>-->
-	<!--</div>-->
-
-	<!--</section>-->
-	<!--<section id="section2" role="tabpanel" aria-hidden="true">-->
-
-	<!--<div class="pure-g">-->
-	<!--<div class="pure-u-1">-->
-	<!--<p><b>Ongoing annual donation of &pound;60</b></p>-->
-	<!--</div>-->
-	<!--<div class="pure-u-2-3">-->
-	<!--<ol class="group">-->
-	<!--<li>&pound;60 a year (four months free)!</li>-->
-	<!--<li>Seven exciting activity cards a month</li>-->
-	<!--<li>Postage and packaging included</li>-->
-	<!--<li class="bolder">No obligation to continue after first year</li>-->
-	<!--</ol>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1-3">-->
-	<!--<img data-th-src="${portal.assetUrl({'_path=/images/exampleCardsVertical.png'})}" alt="" class="pure-img"/>-->
-	<!--</div>-->
-	<!--&lt;!&ndash;div class="pure-u-1 promocode">-->
-	<!--<a href="#">Do you have a promotion code?</a>-->
-	<!--</div&ndash;&gt;-->
-	<!--<div class="pure-u-1">-->
-	<!--<a href="stage2.html" class="buttonlike get-started">Donate annually</a>-->
-	<!--</div>-->
-	<!--</div>-->
-
-	<!--</section>-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--</div>&lt;!&ndash; Single &ndash;&gt;-->
-
-
-	<!--<div class="pure-g multicardholder group">-->
-	<!--<div class="pure-u-1-2">-->
-	<!--<div class="pure-g">-->
-	<!--<div class="pure-u-1 headinglike">-->
-	<!--<h2>Monthly</h2>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1">-->
-	<!--<p class="bolder">Ongoing monthly donation of &pound;7.50</p>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1">-->
-	<!--<ol class="group">-->
-	<!--<li>12 exciting deliveries of activity cards</li>-->
-	<!--<li>Postage and packaging included</li>-->
-	<!--<li>Donations are taken on the 1st of every month</li>-->
-	<!--<li class="bolder">Cancel at anytime</li>-->
-	<!--</ol>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1 promocode">-->
-	<!--<a href="#">Do you have a promotion code?</a>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1">-->
-	<!--<a href="stage2.html" class="buttonlike get-started">Donate monthly</a>-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1-2">-->
-	<!--<div class="pure-g">-->
-	<!--<div class="pure-u-1 headinglike">-->
-	<!--<h2>Annually</h2>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1 headinglike">-->
-	<!--<p><b>Ongoing annual donation of &pound;60</b></p>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1">-->
-	<!--<ol class="group">-->
-	<!--<li>&pound;60 a year (four months free)!</li>-->
-	<!--<li>Seven exciting activity cards a month</li>-->
-	<!--<li>Postage and packaging included</li>-->
-	<!--<li class="bolder">No obligation to continue after first year</li>-->
-	<!--</ol>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1">-->
-	<!--<a href="stage2.html" class="buttonlike get-started">Donate annually</a>-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--</div>&lt;!&ndash; Multi &ndash;&gt;-->
-
-	<!--<div class="pure-g packshot">-->
-	<!--<div class="pure-u-1 pure-u-md-2-3">-->
-	<!--<p>After you've received your 12 packs of activity cards, we hope you will continue to support disabled people and their families with your ongoing donation to Scope.</p>-->
-	<!--</div>-->
-	<!--<div class="pure-u-1 pure-u-md-1-3 cards">-->
-	<!--<img data-th-src="${portal.assetUrl({'_path=/images/cards/packshot.png'})}" alt="An image of the four kinds of cards contained in the packs" class="pure-img centered"/>-->
-	<!--</div>-->
-	<!--</div>-->
-
-	<!--</div>-->
-	<!--</div>-->
-
-	<!--</div>-->
-	<!--</div>-->
-	<!--</div>-->
-
-	<!--<div class="pure-g redbg nobottom questions">-->
-	<!--<div class="pure-u-1">-->
-	<!--<div class="content">-->
-	<!--<span class="whitebubble">Got a question?</span>-->
-	<!--<span>Check out our <a href="#" class="bolder">FAQs</a> Or call us on <a href="#" class="bolder">020 7619 7296</a></span>-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--</div>-->
-
-	<!--</main>-->
-
-	<main role="main" id="main">
-
-		<!-- unique content of page goes here -->
-
-		<div class="pure-g">
-			<div class="pure-u-1">
-				<div class="content">
-					<a href="index.html" class="logolink"><img data-th-src="${portal.assetUrl({'_path=/images/logo.png'})}" alt="Mindful monsters" class="pure-img logo"/></a>
-
-					<div class="pure-g">
-						<div class="pure-u-1">
-							<div class="tlwrapper">
-								<span class="labellike">Step: </span>
-								<ul class="timeline">
-									<li class="timeline-past">
-										<span class="visually-hidden">Completed: </span>
-										<span><a href="stage1.html">1</a></span>
-									</li>
-									<li class="timeline-current">
-										<span class="visually-hidden">Current: </span>
-										<span><a href="stage2.html">2</a></span>
-									</li>
-									<li>
-										<span><a href="stage3.html">3</a></span>
-									</li>
-									<li>
-										<span><a href="stage4.html">4</a></span>
-									</li>
-								</ul>
-							</div>
+				<!-- STEP NUMBERS (PAGER) -->
+				<div class="pure-g">
+					<div class="pure-u-1">
+						<div class="tlwrapper">
+							<span class="labellike">Step: </span>
+							<ul class="timeline">
+								<li class="timeline-current">
+									<span class="visually-hidden">Current: </span>
+									<span><a title="First page of the form" href="#stageone">1</a></span>
+								</li>
+								<li>
+									<span><a title="Second page of the form" href="#stagetwo">2</a></span>
+								</li>
+								<li>
+									<span><a title="Third page of the form" href="#step3">3</a></span>
+								</li>
+								<li>
+									<span><a title="Fourth and last page of the form" href="#step4">4</a></span>
+								</li>
+							</ul>
 						</div>
 					</div>
+				</div>
 
+				<!--STEP 1 OF THE REGISTRATION FORM - TAB STRUCTURE - SELECTING MONTHLY / ANNUAL SUBSCRIPTION-->
+				<div class="form-page step1" id="stageone">
 					<div class="pure-g">
+						<div class="pure-u-1 sparky">
+							<h1 class="bubble">How would you like to donate?</h1>
+						</div>
+
+						<div class="pure-u-1">
+
+							<div class="pure-g singlecardholder">
+								<div class="pure-u-1">
+									<div class="tab-interface">
+										<ul role="tablist">
+											<li role="presentation"><a href="#section1" tabindex="0" role="tab" aria-controls="section1" aria-selected="true">Monthly <span></span></a></li>
+											<li role="presentation"><a href="#section2" tabindex="-1" role="tab" aria-controls="section2">Annually <span></span></a></li>
+										</ul>
+										<section id="section1" role="tabpanel">
+
+											<div class="pure-g">
+												<div class="pure-u-1">
+													<p><b>Ongoing monthly donation of &pound;7.50</b></p>
+												</div>
+												<div class="pure-u-2-3">
+													<ol class="group">
+														<li>12 exciting deliveries of activity cards</li>
+														<li>Postage and packaging included</li>
+														<li>Donations are taken on the 1st of every month</li>
+														<li class="bolder">Cancel at anytime</li>
+													</ol>
+												</div>
+												<div class="pure-u-1-3">
+													<img data-th-src="${portal.assetUrl({'_path=/images/exampleCardsVertical.png'})}" alt="" class="pure-img"/>
+												</div>
+												<div class="pure-u-1 promocode">
+													<a href="#">Do you have a promotion code?</a>
+												</div>
+												<div class="pure-u-1">
+													<a href="#step2" class="buttonlike get-started" data-plan="monthly">Donate monthly</a>
+												</div>
+											</div>
+
+										</section>
+										<section id="section2" role="tabpanel" aria-hidden="true">
+
+											<div class="pure-g">
+												<div class="pure-u-1">
+													<p><b>Ongoing annual donation of &pound;60</b></p>
+												</div>
+												<div class="pure-u-2-3">
+													<ol class="group">
+														<li>&pound;60 a year (four months free)!</li>
+														<li>Seven exciting activity cards a month</li>
+														<li>Postage and packaging included</li>
+														<li class="bolder">No obligation to continue after first year</li>
+													</ol>
+												</div>
+												<div class="pure-u-1-3">
+													<img data-th-src="${portal.assetUrl({'_path=/images/exampleCardsVertical.png'})}" alt="" class="pure-img"/>
+												</div>
+												<div class="pure-u-1">
+													<a href="#step2" class="buttonlike get-started" data-plan="annual">Donate annually</a>
+												</div>
+											</div>
+
+										</section>
+									</div>
+								</div>
+							</div><!-- Single -->
+
+
+							<div class="pure-g multicardholder group">
+								<div class="pure-u-1-2">
+									<div class="pure-g">
+										<div class="pure-u-1 headinglike">
+											<h2>Monthly</h2>
+										</div>
+										<div class="pure-u-1">
+											<p class="bolder">Ongoing monthly donation of &pound;7.50</p>
+										</div>
+										<div class="pure-u-1">
+											<ol class="group">
+												<li>12 exciting deliveries of activity cards</li>
+												<li>Postage and packaging included</li>
+												<li>Donations are taken on the 1st of every month</li>
+												<li class="bolder">Cancel at anytime</li>
+											</ol>
+										</div>
+										<div class="pure-u-1 promocode">
+											<a href="#">Do you have a promotion code?</a>
+										</div>
+										<div class="pure-u-1">
+											<a href="stage2.html" class="buttonlike get-started" data-plan="monthly">Donate monthly</a>
+										</div>
+									</div>
+								</div>
+								<div class="pure-u-1-2">
+									<div class="pure-g">
+										<div class="pure-u-1 headinglike">
+											<h2>Annually</h2>
+										</div>
+										<div class="pure-u-1 headinglike">
+											<p><b>Ongoing annual donation of &pound;60</b></p>
+										</div>
+										<div class="pure-u-1">
+											<ol class="group">
+												<li>&pound;60 a year (four months free)!</li>
+												<li>Seven exciting activity cards a month</li>
+												<li>Postage and packaging included</li>
+												<li class="bolder">No obligation to continue after first year</li>
+											</ol>
+										</div>
+										<div class="pure-u-1">
+											<a href="stage2.html" class="buttonlike get-started" data-plan="annual">Donate annually</a>
+										</div>
+									</div>
+								</div>
+							</div><!-- Multi -->
+
+							<div class="pure-g packshot">
+								<div class="pure-u-1 pure-u-md-2-3">
+									<p>After you've received your 12 packs of activity cards, we hope you will continue to support disabled people and their families with your ongoing donation to Scope.</p>
+								</div>
+								<div class="pure-u-1 pure-u-md-1-3 cards">
+									<img data-th-src="${portal.assetUrl({'_path=/images/cards/packshot.png'})}" alt="An image of the four kinds of cards contained in the packs" class="pure-img centered"/>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<!--STEP 2 OF THE REGISTRATION FORM - ENTERING NAME AND EMAIL ADDRESS-->
+				<div class="form-page step2" id="stagetwo" style="display: none">
+					<div class="pure-g">
+						<!-- USERNAME AND EMAIL INPUTS -->
 						<div class="pure-u-1 pure-u-sm-1-2">
 							<form class="pure-form pure-form-stacked">
 
@@ -221,24 +175,24 @@
 
 									<fieldset>
 										<label for="first-name">First name</label>
-										<input id="first-name" type="text" placeholder=""/>
+										<input id="first-name" type="text" placeholder="" required="required"/>
 										<!--span class="pure-form-message">This is a required field.</span -->
 									</fieldset>
 
 									<fieldset>
 										<label for="last-name" class="error">Last name</label>
-										<input id="last-name" class="error" type="text" placeholder=""/>
+										<input id="last-name" class="error" type="text" placeholder="" required="required"/>
 										<div class="errormessage">This field is mandatory</div>
 									</fieldset>
 
 									<fieldset>
 										<label for="email-address">Email</label>
-										<input id="email-address" type="email" placeholder=""/>
+										<input id="email-address" type="email" placeholder="" required="required"/>
 									</fieldset>
 
 									<fieldset>
 										<label for="confirm-email-address">Confirm email</label>
-										<input id="confirm-email-address" type="email" placeholder=""/>
+										<input id="confirm-email-address" type="email" placeholder="" required="required"/>
 									</fieldset>
 
 									<fieldset>
@@ -260,7 +214,7 @@
 
 							</form>
 						</div>
-
+						<!-- CARD IMAGES AND LIST OF TEXT UNDERNEATH -->
 						<div class="pure-u-1 pure-u-sm-1-2 pure-hidden-xs">
 
 							<img data-th-src="${portal.assetUrl({'_path=/images/monsters/snug/onewing.png'})}" class="pure-img" alt=""/>
@@ -283,19 +237,27 @@
 						</div>
 
 					</div>
-
 				</div>
+
+				<div class="form-page step3" id="step3" style="display: none">
+					<h1>Third page</h1>
+				</div>
+
+				<div class="form-page step4" id="step4" style="display: none">
+					<h1>4TH page</h1>
+				</div>
+
 			</div>
 		</div>
+	</div>
 
-		<div class="pure-g redbg nobottom questions">
-			<div class="pure-u-1">
-				<div class="content">
-					<span class="whitebubble">Got a question?</span>
-					<span>Check out our <a href="#" class="bolder">FAQs</a> Or call us on <a href="#" class="bolder">020 7619 7296</a></span>
-				</div>
+	<div class="pure-g redbg nobottom questions">
+		<div class="pure-u-1">
+			<div class="content">
+				<span class="whitebubble">Got a question?</span>
+				<span>Check out our <a href="#" class="bolder">FAQs</a> Or call us on <a href="#" class="bolder">020 7619 7296</a></span>
 			</div>
 		</div>
+	</div>
 
-	</main>
-</div>
+</main>

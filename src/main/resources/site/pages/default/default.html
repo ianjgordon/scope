@@ -1,3 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<!--  Meta  -->
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>Home | Mindful Monsters</title>
+
+	<!--  Styles  -->
+	<link rel="stylesheet" data-th-href="${portal.assetUrl({'_path=/css/style.css'})}"/>
+	<!--  /  -->
+
+</head>
+
+<body id="landing-page" data-portal-component-type="page">
+
+<!--HEADER-->
+<div class="pure-g">
+	<div class="pure-u-1 scope-top-banner">Brought to you by <a href="#">Scope</a></div>
+</div>
+
+
+<!--MAIN REGION-->
+<div data-portal-region="main">
+	<div data-th-if="${mainRegion}" data-th-each="component : ${mainRegion.components}" data-th-remove="tag">
+		<div data-portal-component="${component.path}" data-th-remove="tag"></div>
+	</div>
+</div>
+
+<!--FOOTER-->
 <footer>
 	<div class="pure-g">
 		<div class="content">
@@ -33,8 +65,18 @@
 	<div class="pure-g smallprint">
 		<div class="content">
 			<div class="pure-u-1">
-				<!--<p>Scope is a registered charity number. 208231. Registered as a company limited by guarantee number. 520866 (England &amp; Wales). Registered office: Scope, 6 Market Road, London, N7 9PW. VAT registration number 805 1569 39 Copyright © Scope 2016</p>-->
+				<p>Scope is a registered charity number. 208231. Registered as a company limited by guarantee number. 520866 (England &amp; Wales). Registered office: Scope, 6 Market Road, London, N7 9PW. VAT registration number 805 1569 39 Copyright © Scope 2016</p>
 			</div>
 		</div>
 	</div>
 </footer>
+
+<script data-th-src="${portal.assetUrl({'_path=/libs/lodash-4.17.4.min.js'})}"></script>
+<script data-th-src="${portal.assetUrl({'_path=/libs/jquery-3.2.1.min.js'})}"></script>
+<script data-th-src="${portal.assetUrl({'_path=/libs/ally.min.js'})}"></script>
+<script data-th-src="${portal.assetUrl({'_path=/scripts/helpers.js'})}"></script>
+<script data-th-src="${portal.assetUrl({'_path=/scripts/tabbing.js'})}"></script>
+<script data-th-src="${portal.assetUrl({'_path=/scripts/main.js'})}"></script>
+</body>
+
+</html>
