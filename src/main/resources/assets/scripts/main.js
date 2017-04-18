@@ -1,14 +1,32 @@
 $(document).ready(function () {
+
+	// config object for calling APIs est
+	window.scConfig = {
+		// API key for PCA Predict address lookup
+		pcaAddressAPIKey    : 'AY29-CM18-GM19-XH93',
+		// PCA Predict Search url (finding addresses based on free text)
+		pcaSearchURL        : '//services.postcodeanywhere.co.uk/CapturePlus/Interactive/Find/v2.10/json3.ws',
+		// PCA Predict url for getting a specifi address's details
+		pcaAddressDetailsURL: '//services.postcodeanywhere.co.uk/CapturePlus/Interactive/Retrieve/v2.10/json3.ws'
+	};
+
 	// Handling form data and validation
 	window.scForm = {
 		// defining user form element id's to register events to
-		userFormKeys      : [
+		userFormKeys         : [
 			'first-name', 'last-name', 'email-address', 'confirm-email-address'
 		],
+		addressFormKeyMapping: {
+			'street-address': 'Line1',
+			'line2'         : 'Line2',
+			'line3'         : 'Line3',
+			'city'          : 'City',
+			'postcode'      : 'PostalCode'
+		},
 		// error messages
-		validationMessages: [],
+		validationMessages   : [],
 		// form values
-		values            : {
+		values               : {
 
 			// promo code applied
 			promoCode: false,
@@ -149,15 +167,74 @@ $(document).ready(function () {
 			scForm.setFormValue('promoCode', val);
 			// set plan variable
 			scForm.setPlan(plan);
+		},
+		autoFillAddressForm        : function (data) {
+			$('#address-form-details').show();
+			_.each(scForm.addressFormKeyMapping, function (dataKey, elementId) {
+				$('#' + elementId).val(data[dataKey]);
+			});
+		},
+		APISearchAddresses     : function () {
+			$.ajax({
+				url     : scConfig.pcaSearchURL,
+				dataType: "jsonp",
+				data    : {
+					key       : scConfig.pcaAddressAPIKey,
+					searchFor : "Everything",
+					country   : 'UK',
+					searchTerm: $('#postcode-search').val()
+				},
+				success : function (data) {
+					if (data.Items[0].Next !== 'Retrieve') {
+						// TODO send error message
+
+					} else {
+						// // build select box with search results
+						scForm.layout.buildSearchSelect(data.Items);
+						// set action for 'Select address' button
+						$('#select-address-result').on('click', function (e, item) {
+							scForm.APIGetAddressDetails();
+						});
+					}
+				}
+			});
+		},
+		APIGetAddressDetails   : function () {
+			var address = $('#address-results').val();
+			$.ajax({
+				url     : scConfig.pcaAddressDetailsURL,
+				dataType: "jsonp",
+				data    : {
+					key: scConfig.pcaAddressAPIKey,
+					id : address
+				},
+				success : function (data) {
+					if (data.Items.length) {
+						if (data.Items[0] !== 'Error') {
+
+							// Fill form with data
+							scForm.autoFillAddressForm(data.Items[0]);
+
+
+
+							// TODO delete these
+							// $('#selected-address').html(JSON.stringify(data.Items[0]));
+							log(data.Items[0]);
+						} else {
+							// TODO error handling
+						}
+					}
+				}
+			});
 		}
 	};
 
 	// handling form layout (pager etc)
 	scForm.layout = {
 		// currently active form page (first by default)
-		activePage: 1,
+		activePage       : 1,
 		// go to given form page
-		goToPage  : function (num) {
+		goToPage         : function (num) {
 			// hiding other elements
 			$('.form-page').each(function (i, elem) {
 				$(elem).hide();
@@ -177,8 +254,21 @@ $(document).ready(function () {
 			// add back to regular tabindex
 			$('ul.timeline>li').eq(scForm.layout.activePage - 1).find('a').removeAttr('tabindex');
 		},
+		// build Address search Results
+		buildSearchSelect: function (data) {
+			// Build select box with result addresses
+			var all    = $('<div></div>');
+			var select = $('<select id="address-results" name="address-results"></select>');
+			_.each(data, function (result) {
+				select.append($('<option value="' + result.Id + '">' + result.Text + '</option>'));
+			});
+			var butt = $('<button name="select-address-result" id="select-address-result">Select address</button>');
+			all.append(select);
+			all.append(butt);
+			$('#results').html(all);
+		},
 		// initializing event handlers etc
-		init      : function () {
+		init             : function () {
 			// making step number links unclickable - (only way forward would be with buttons)
 			$('.timeline a').each(function (i, elem) {
 				$(elem).on('click', function (e) {
@@ -252,13 +342,30 @@ $(document).ready(function () {
 				scForm.layout.goToPage(1);
 			});
 
+			// Back button
+			$('#back3').on('click', function (e) {
+				e.preventDefault();
+				// go to next step
+				scForm.layout.goToPage(2);
+			});
+
+			// Submitting a User form
 			$('#userform').on('submit', function (e) {
 				e.preventDefault();
 				scForm.submitUserForm();
 			});
 
+			// // Submitting an address form
+			// $('#addressform').on('submit', function (e) {
+			// 	e.preventDefault();
+			// 	scForm.submitAddressForm();
+			// });
+
+			// Searching for addresses based on given text (hopefully postcode)
+			$('#find-address').on('click', function () {
+				scForm.APISearchAddresses();
+			});
 		}
 	};
-
 	scForm.layout.init();
 });
