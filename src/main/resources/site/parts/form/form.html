@@ -189,31 +189,31 @@
 
 									<fieldset>
 										<label for="first-name" class="field-label">First name</label>
-										<input id="first-name" type="text" placeholder="" required="required"/>
+										<input id="first-name" name="first-name" type="text" placeholder="" required="required"/>
 										<label id="first-name-error" class="errormessage" style="display: none">This field is mandatory</label>
 									</fieldset>
 
 									<fieldset>
 										<label for="last-name" class="field-label">Last name</label>
-										<input id="last-name" type="text" placeholder="" required="required"/>
+										<input id="last-name" name="last-name" type="text" placeholder="" required="required"/>
 										<label id="last-name-error" class="errormessage" style="display: none">This field is mandatory</label>
 									</fieldset>
 
 									<fieldset>
 										<label for="email-address" class="field-label">Email</label>
-										<input id="email-address" type="email" placeholder="" required="required"/>
+										<input id="email-address" name="email-address" type="email" placeholder="" required="required"/>
 										<label id="email-address-error" class="errormessage" style="display: none">The email is not valid</label>
 									</fieldset>
 
 									<fieldset>
 										<label for="confirm-email-address" class="field-label">Confirm email</label>
-										<input id="confirm-email-address" type="email" placeholder="" required="required"/>
+										<input id="confirm-email-address" name="confirm-email-address" type="email" placeholder="" required="required"/>
 										<label id="confirm-email-address-error" class="errormessage" style="display: none">The email fields doesn't seem to match</label>
 									</fieldset>
 
 									<fieldset>
 										<label for="remember" class="pure-checkbox">
-											<input id="remember" type="checkbox"/>
+											<input id="remember" name="remember" type="checkbox"/>
 											<b>Don't forget to tick this box</b> so we can email you about your order, send you bonus activities and tips, and tell you more about Scope's work.
 											You can change your communication preferences at any time.
 										</label>
@@ -222,9 +222,8 @@
 
 
 								<div class="group">
-									<button type="submit" id="continue-to-step-3" class="pure-button continue right">Continue</button>
-
-									<button type="button" id="back2" class="pure-button back left">Back</button>
+									<button type="submit" id="submit-user-form" class="pure-button continue right">Continue</button>
+									<button type="button" class="pure-button back left gotopage" data-page="1">Back</button>
 								</div>
 
 
@@ -257,30 +256,36 @@
 
 				<div class="form-page step3" id="step3" style="display: none">
 					<div class="pure-g">
-						<!-- USERNAME AND EMAIL INPUTS -->
+						<!-- ADDRESS INPUTS -->
 						<div class="pure-u-1 pure-u-sm-1-2">
-							<form class="pure-form pure-form-stacked" id="addressform">
+
+							<!--SEARCH POSTCODE FORM-->
+							<form class="pure-form pure-form-stacked" id="addresssearchfom">
 
 								<h1 class="bubble">Where should we send Mindful Monsters</h1>
 
+								<fieldset>
+									<label for="postcode-search" class="field-label">Search postcode</label>
+									<input id="postcode-search" name="postcode-search" type="text" placeholder=""/>
+									<label id="postcode-search-error" class="errormessage" style="display: none">Please provide a valid postcode</label>
+									<button type="button" id="find-address">Find address</button>
+									<span>Can't find your address</span>
+									<a id="show-address-link" href="#address-form-details">Enter it manually</a>
+								</fieldset>
+
+								<!--THIS IS WHERE THE ADDRESS SELECT BOX WILL APPEAR-->
+								<div id="results"></div>
+							</form>
+
+							<!--ADDRESS DETAILS FORM-->
+							<form class="pure-form pure-form-stacked" id="addressform">
+
 								<div class="group">
-
-									<fieldset>
-										<label for="postcode-search" class="field-label">Search postcode</label>
-										<input id="postcode-search" name="postcode-search" type="text" placeholder=""/>
-										<button name="find-address" id="find-address">Find address</button>
-									</fieldset>
-
-									<div id="results">
-
-									</div>
-
-									<div id="selected-address"></div>
 
 									<div id="address-form-details" style="display: none">
 										<fieldset>
 											<label for="street-address" class="field-label">Street address</label>
-											<input name="street-address" id="street-address" type="text" placeholder="" required="required"/>
+											<input id="street-address" name="street-address" type="text" placeholder="" required="required"/>
 											<label id="street-address-error" class="errormessage" style="display: none">This field is mandatory</label>
 										</fieldset>
 
@@ -311,8 +316,13 @@
 											<label id="postcode-error" class="errormessage" style="display: none">This field is mandatory</label>
 										</fieldset>
 
-
 									</div>
+
+									<fieldset>
+										<label for="mobile" class="field-label">Mobile number<span>(optional)</span></label>
+										<input id="mobile" name="mobile" type="text" placeholder=""/>
+										<label id="mobile-error" class="errormessage" style="display: none">Please provide a valid UK phone number</label>
+									</fieldset>
 
 									<fieldset>
 										<label for="check1" class="pure-checkbox">
@@ -324,7 +334,7 @@
 
 									<fieldset>
 										<label for="check2" class="pure-checkbox">
-											<input id="check2" type="checkbox"/>
+											<input id="check2" name="check2" type="checkbox"/>
 											<b>Don't forget to tick this box</b> so we can email you about your order, send you bonus activities and tips, and tell you more about Scope's work.
 											You can change your communication preferences at any time.
 										</label>
@@ -333,9 +343,9 @@
 
 
 								<div class="group">
-									<button type="submit" id="continue-to-step-4" class="pure-button continue right">Continue</button>
+									<button type="submit" id="submit-address-form" class="pure-button continue right">Continue</button>
 
-									<button type="button" id="back3" class="pure-button back left">Back</button>
+									<button type="button" id="back3" class="pure-button back left gotopage" data-page="2">Back</button>
 								</div>
 
 
@@ -345,8 +355,130 @@
 					</div>
 				</div>
 
+
 				<div class="form-page step4" id="step4" style="display: none">
-					<h1>4TH page</h1>
+
+					<div class="pure-g">
+						<!-- CARD DETAIL INPUTS -->
+						<div class="pure-u-1 pure-u-sm-1-2">
+							<form class="pure-form pure-form-stacked" id="cardform">
+
+								<h1 class="bubble">Now add your card details</h1>
+
+								<p>We'll take your donation through recurring credit or debit card payments</p>
+
+								<div class="group">
+
+									<fieldset>
+										<label for="card-name" class="field-label">Name on card</label>
+										<input id="card-name" name="card-name" type="text" placeholder=""/>
+										<label id="card-name-error" class="errormessage" style="display: none">Please provide the name on the card</label>
+									</fieldset>
+
+									<fieldset>
+										<label for="card-number" class="field-label">Card number</label>
+										<input id="card-number" name="card-number" type="text" placeholder="" required="required"/>
+										<label id="card-number-error" class="errormessage" style="display: none">Please provide a valid card number</label>
+									</fieldset>
+
+									<fieldset class="card-expiry">
+										<label for="card-expiry-month" class="field-label">Expiry month</label>
+										<select id="card-expiry-month" name="card-expiry-month">
+											<option value="1">01</option>
+											<option value="2">02</option>
+											<option value="3">03</option>
+											<option value="4">04</option>
+											<option value="5">05</option>
+											<option value="6">06</option>
+											<option value="7">07</option>
+											<option value="8">08</option>
+											<option value="9">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+										</select>
+										/
+										<label for="card-expiry-year" class="field-label">Expiry year</label>
+										<select id="card-expiry-year" name="card-expiry-year">
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+											<option value="24">24</option>
+											<option value="25">25</option>
+											<option value="26">26</option>
+											<option value="27">27</option>
+											<option value="28">28</option>
+											<option value="29">29</option>
+											<option value="30">30</option>
+										</select>
+									</fieldset>
+
+									<fieldset>
+										<label for="card-security-code" class="field-label">Security code</label>
+										<input id="card-security-code" name="card-security-code" type="text" placeholder=""/>
+										<label id="card-security-code-error" class="errormessage" style="display: none">Please provide the security code (CVC) from the back of the card</label>
+									</fieldset>
+
+									<fieldset>
+										<label for="card-issue-number" class="field-label">Issue number</label>
+										<input id="card-issue-number" name="card-issue-number" type="text" placeholder=""/>
+									</fieldset>
+
+									<fieldset>
+										<label for="card-check1" class="pure-checkbox">
+											<input id="card-check1" name="card-check1" type="checkbox"/>
+											<b>Tick here if your billing address is the same as your delivery address</b>
+										</label>
+									</fieldset>
+
+									<fieldset>
+										<label for="card-check2" class="pure-checkbox">
+											<input id="card-check2" name="card-check2" type="checkbox"/>
+											<b>Tick here if your billing address is the same as your delivery address</b>
+										</label>
+									</fieldset>
+								</div>
+
+								<div class="group">
+									<button type="submit" id="submit-card-form" class="pure-button continue right">Review order</button>
+									<button type="button" class="pure-button back left gotopage" data-page="3">Back</button>
+								</div>
+
+							</form>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="form-page step5" id="step5" style="display: none">
+					<div class="pure-g">
+						<div class="pure-u-1 pure-u-sm-1-2">
+							<h1 class="bubble">Great! You're almost done!</h1>
+
+							<p>Just one last step - doubl checking your order details.</p>
+
+							<h3>Donation details</h3>
+							<a href="#stageone" class="nofollow gotopage" data-page="1">Edit</a>
+							<p>sdfsdf</p>
+							<h3>Your details</h3>
+							<a href="#stagetwo" class="nofollow gotopage" data-page="2">Edit</a>
+							<p>asdads</p>
+							<h3>Your delivery details</h3>
+							<a href="#step3" class="nofollow gotopage" data-page="3">Edit</a>
+							<p>sdf;kjsdf</p>
+							<h3>Donation</h3>
+							<a href="#step4" class="nofollow gotopage" data-page="4">Edit</a>
+							<p>sfsdfdsf</p>
+
+							<div class="group">
+								<button type="button" id="place-order" class="pure-button back left">Place order</button>
+							</div>
+						</div>
+					</div>
 				</div>
 
 			</div>

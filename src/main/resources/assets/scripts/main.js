@@ -13,9 +13,10 @@ $(document).ready(function () {
 	// Handling form data and validation
 	window.scForm = {
 		// defining user form element id's to register events to
-		userFormKeys         : [
-			'first-name', 'last-name', 'email-address', 'confirm-email-address'
-		],
+		userFormFields       : ['first-name', 'last-name', 'email-address', 'confirm-email-address'],
+		cardFormFields       : ['card-name', 'card-number', 'card-expiry-month', 'card-expiry-year', 'card-security-code', 'card-issue-number'],
+		addressFormFields    : ['street-address', 'line2', 'line3', 'city', 'county', 'postcode', 'mobile'],
+		optionalFields       : ['line2', 'line3', 'county', 'card-issue-number'],
 		addressFormKeyMapping: {
 			'street-address': 'Line1',
 			'line2'         : 'Line2',
@@ -43,14 +44,27 @@ $(document).ready(function () {
 			// promotianal checkbox
 			promo: false,
 
-			// payment details
-			cardDetails: false
+			// address fields
+			'street-address': false,
+			'line2'         : false,
+			'line3'         : false,
+			'city'          : false,
+			'county'        : false,
+			'postcode'      : false,
+			'mobile'        : false,
+
+			// card details
+			'card-name'         : false,
+			'card-number'       : false,
+			'card-expiry-month' : false,
+			'card-expiry-year'  : false,
+			'card-security-code': false,
+			'card-issue-number' : false
 		},
 
 		// set value to the form
 		setFormValue           : function (key, value) {
 			if (_.includes(_.keys(scForm.values), key)) {
-
 				// TODO specify setting special form element values (addres, card details etc)
 				switch (key) {
 					case 'promoCode':
@@ -75,27 +89,52 @@ $(document).ready(function () {
 		// validate a form value we are about to set
 		validateFormValue      : function (key, value) {
 			// email validation regular expression
-			function validateEmail(email) {
+			function validateEmail(val) {
 				var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-				return re.test(email);
+				return re.test(val);
+			}
+
+			// UK phone validation regular expression
+			function validateMobile(val) {
+				var re = /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/;
+				return re.test(val);
+			}
+
+			// UK phone validation regular expression
+			function validateCVV(val) {
+				var re = /^[0-9]{3,4}$/;
+				return re.test(val);
 			}
 
 			// check if we have the key stored
 			if (_.includes(_.keys(scForm.values), key)) {
+				// These are the fields that don't need validation
+				if (_.includes(scForm.optionalFields, key)) {
+					return true;
+				}
+				// set validation based on the key
 				switch (key) {
-					case 'plan':
+					case 'plan':// selecting a plan (monthly, annual)
 						return value === 'monthly' || value === 'annual';
-					case 'email-address':
-						// TODO check email validation
+					case 'email-address': //(needs to be valid email)
 						return validateEmail(value);
+					case 'card-security-code': //(needs to be valid cvv)
+						return validateCVV(value);
+					case 'mobile': // if given, validate as mobile
+						if (!_.isEmpty(value)) {
+							logi('validating', validateMobile(value));
+							return validateMobile(value);
+						}
+						return true;
 					case 'confirm-email-address':
 						// check if the email is already validated and saved, and if we wrote the same as a confirmation email
 						return scForm.values['email-address'] && value === scForm.values['email-address'];
+					// if none of the above, treat the field as it should be provided (not empty)
 					default:
 						return !_.isEmpty(value);
 				}
 			} else {
-				return false;
+				return '';
 			}
 		},
 		invalidForm            : function (key, value) {
@@ -107,25 +146,21 @@ $(document).ready(function () {
 					// we don't need to store message in javascript in most cases, enough to show hidden error messages in HTML
 					scForm.validationMessages.push({message: 'Please provide this field', key: key});
 			}
-			// TODO set error messages and show them at appropriate places
-			// (config element id's or classes to different validation errors)
 		},
 		showErrorMessages      : function (step) {
 			if (!_.isEmpty(scForm.validationMessages)) {
-				if (step === 2) {
-					// show all error messages
-					_.each(_.map(scForm.validationMessages, 'key'), function (invalidInput) {
-						var inputId = '#' + invalidInput;
-						// show specific error messages
-						$(inputId + '-error').show();
-						// add error class to input field
-						$(inputId).addClass('error');
-						// add error class to the field label
-						$(inputId).prev('label.field-label').addClass('error');
-					});
-					// focus on first error
-					$('#' + _.first(_.map(scForm.validationMessages, 'key'))).focus();
-				}
+				// show all error messages
+				_.each(_.map(scForm.validationMessages, 'key'), function (invalidInput) {
+					var inputId = '#' + invalidInput;
+					// show specific error messages
+					$(inputId + '-error').show();
+					// add error class to input field
+					$(inputId).addClass('error');
+					// add error class to the field label
+					$(inputId).prev('label.field-label').addClass('error');
+				});
+				// focus on first error
+				$('#' + _.first(_.map(scForm.validationMessages, 'key'))).focus();
 			}
 		},
 		emptyValidationMessages: function () {
@@ -146,10 +181,56 @@ $(document).ready(function () {
 				scForm.showErrorMessages(2);
 			}
 		},
+		submitAddressForm      : function () {
+			// hide error messages and classes
+			$('#addressform .errormessage').hide();
+			$('#addressform input.error').removeClass('error');
+			$('#addressform .field-label').removeClass('error');
+			// try saving user form data
+			scForm.saveAddressFormData();
+			// if form is valid and the data is stored, go to next step
+			if (_.isEmpty(scForm.validationMessages)) {
+				scForm.layout.goToPage(4);
+			} else {
+				// in case of invalid form, show validation messages inline labels
+				scForm.showErrorMessages(3);
+			}
+		},
+		submitCardForm         : function () {
+			// hide error messages and classes
+			$('#cardform .errormessage').hide();
+			$('#cardform input.error').removeClass('error');
+			$('#cardform .field-label').removeClass('error');
+			// try saving user form data
+			scForm.saveCardFormData();
+			// if form is valid and the data is stored, go to next step
+			if (_.isEmpty(scForm.validationMessages)) {
+				scForm.layout.goToPage(5);
+			} else {
+				// in case of invalid form, show validation messages inline labels
+				scForm.showErrorMessages(4);
+			}
+		},
 		// validating and saving user form values
 		saveUserFormData       : function () {
 			scForm.emptyValidationMessages();
-			_.each(scForm.userFormKeys, function (key) {
+			_.each(scForm.userFormFields, function (key) {
+				scForm.setFormValue(key, $('#' + key).val());
+			});
+			scForm.showErrorMessages();
+		},
+		// validating and saving user form values
+		saveCardFormData       : function () {
+			scForm.emptyValidationMessages();
+			_.each(scForm.cardFormFields, function (key) {
+				scForm.setFormValue(key, $('#' + key).val());
+			});
+			scForm.showErrorMessages();
+		},
+		// validating and saving address form values
+		saveAddressFormData    : function () {
+			scForm.emptyValidationMessages();
+			_.each(scForm.addressFormFields, function (key) {
 				scForm.setFormValue(key, $('#' + key).val());
 			});
 			scForm.showErrorMessages();
@@ -159,8 +240,6 @@ $(document).ready(function () {
 			scForm.setFormValue('plan', plan);
 			// go to next step
 			scForm.layout.goToPage(2);
-			// focus user firstname
-			$('#first-name').focus();
 		},
 		setPromoCode           : function (val, plan) {
 			// set promo code to form variables
@@ -168,13 +247,15 @@ $(document).ready(function () {
 			// set plan variable
 			scForm.setPlan(plan);
 		},
-		autoFillAddressForm        : function (data) {
+		autoFillAddressForm    : function (data) {
 			$('#address-form-details').show();
 			_.each(scForm.addressFormKeyMapping, function (dataKey, elementId) {
 				$('#' + elementId).val(data[dataKey]);
 			});
 		},
 		APISearchAddresses     : function () {
+			// hide special postcode search erro message
+			$('#postcode-search-error').hide();
 			$.ajax({
 				url     : scConfig.pcaSearchURL,
 				dataType: "jsonp",
@@ -185,11 +266,12 @@ $(document).ready(function () {
 					searchTerm: $('#postcode-search').val()
 				},
 				success : function (data) {
-					if (data.Items[0].Next !== 'Retrieve') {
-						// TODO send error message
-
+					if (_.isEmpty(data.Items) || data.Items[0].Next !== 'Retrieve') {
+						// search error message
+						$('#postcode-search-error').show();
+						console.warn('invalid postcode provided');
 					} else {
-						// // build select box with search results
+						// build select box with search results
 						scForm.layout.buildSearchSelect(data.Items);
 						// set action for 'Select address' button
 						$('#select-address-result').on('click', function (e, item) {
@@ -211,17 +293,11 @@ $(document).ready(function () {
 				success : function (data) {
 					if (data.Items.length) {
 						if (data.Items[0] !== 'Error') {
-
 							// Fill form with data
 							scForm.autoFillAddressForm(data.Items[0]);
-
-
-
-							// TODO delete these
-							// $('#selected-address').html(JSON.stringify(data.Items[0]));
-							log(data.Items[0]);
 						} else {
 							// TODO error handling
+							alert('there was an error');
 						}
 					}
 				}
@@ -249,10 +325,18 @@ $(document).ready(function () {
 			$('ul.timeline>li.timeline-current').removeClass('timeline-current');
 			// maintain tabindex
 			$('ul.timeline>li.timeline-current a').attr('tabindex', -1);
+
+			// calculate active element index (page five stays on 4th tab)
+			var newIndex = scForm.layout.activePage === 5 ? 3 : scForm.layout.activePage - 1;
 			// add new active
-			$('ul.timeline>li').eq(scForm.layout.activePage - 1).addClass('timeline-current');
+			$('ul.timeline>li').eq(newIndex).addClass('timeline-current');
 			// add back to regular tabindex
-			$('ul.timeline>li').eq(scForm.layout.activePage - 1).find('a').removeAttr('tabindex');
+			$('ul.timeline>li').eq(newIndex).find('a').removeAttr('tabindex');
+
+			// scroll to the top of the page
+			window.scrollTo(0, 0);
+			// focus first input
+			$('form :input:visible:enabled:first').focus();
 		},
 		// build Address search Results
 		buildSearchSelect: function (data) {
@@ -313,9 +397,21 @@ $(document).ready(function () {
 			});
 
 			// setting event handlers on the 'Continue' buttons
-			$('button#continue-to-step-3').on('click', function (e) {
+			$('button#submit-user-form').on('click', function (e) {
 				e.preventDefault();
 				scForm.submitUserForm();
+			});
+
+			// setting event handlers on the 'Continue' buttons
+			$('button#submit-address-form').on('click', function (e) {
+				e.preventDefault();
+				scForm.submitAddressForm();
+			});
+
+			// setting event handlers on the 'Continue' buttons
+			$('button#submit-card-form').on('click', function (e) {
+				e.preventDefault();
+				scForm.submitCardForm();
 			});
 
 			// setting event for clicking on 'select plan' buttons (monthly, anually)
@@ -335,34 +431,40 @@ $(document).ready(function () {
 				scForm.setFormValue('promo', this.checked);
 			});
 
-			// Back button
-			$('#back2').on('click', function (e) {
+			$('.gotopage').on('click', function (e) {
 				e.preventDefault();
-				// go to next step
-				scForm.layout.goToPage(1);
+				scForm.layout.goToPage($(this).attr('data-page'));
 			});
-
-			// Back button
-			$('#back3').on('click', function (e) {
-				e.preventDefault();
-				// go to next step
-				scForm.layout.goToPage(2);
-			});
-
-			// Submitting a User form
-			$('#userform').on('submit', function (e) {
-				e.preventDefault();
-				scForm.submitUserForm();
-			});
-
-			// // Submitting an address form
-			// $('#addressform').on('submit', function (e) {
-			// 	e.preventDefault();
-			// 	scForm.submitAddressForm();
-			// });
 
 			// Searching for addresses based on given text (hopefully postcode)
 			$('#find-address').on('click', function () {
+				scForm.APISearchAddresses();
+			});
+			// Searching for addresses based on given text (hopefully postcode)
+			$('#show-address-link').on('click', function (e) {
+				e.preventDefault();
+				$('#address-form-details').show();
+			});
+
+
+			// Submitting forms
+			$('#userform').on('submit', function (e) {
+				alert('form submitted');
+				e.preventDefault();
+				scForm.submitUserForm();
+			});
+			$('#addressform').on('submit', function (e) {
+				alert('form submitted');
+				e.preventDefault();
+				scForm.submitAddressForm();
+			});
+			$('#cardform').on('submit', function (e) {
+				alert('form submitted');
+				e.preventDefault();
+				scForm.submitCardForm();
+			});
+			$('#addresssearchfom').on('submit', function (e) {
+				e.preventDefault();
 				scForm.APISearchAddresses();
 			});
 		}
