@@ -232,7 +232,7 @@
 						<!-- CARD IMAGES AND LIST OF TEXT UNDERNEATH -->
 						<div class="pure-u-1 pure-u-sm-1-2 pure-hidden-xs">
 
-							<img data-th-src="${portal.assetUrl({'_path=/images/monsters/snug/onewing.png'})}" class="pure-img monster" alt=""/>
+							<img data-th-src="${portal.assetUrl({'_path=/images/monsters/snug/onewing.png'})}" class="pure-img monster" alt="" align="right"/>
 
 							<div class="pure-g look-forward">
 								<div class="pure-u-1">
@@ -240,12 +240,12 @@
 										<img data-th-src="${portal.assetUrl({'_path=/images/exampleCardsHorizontal.png'})}" class="pure-img" alt=""/>
 									</div>
 									<h3>You can look forward to...</h3>
-									<ol>
+									<ul>
 										<li>Seven activity cards a month!</li>
 										<li>Stickers and a parent's guide in your welcome pack</li>
 										<li>A special carry case with your second pack</li>
 										<li>Seeing the life-changing impact your support will have</li>
-									</ol>
+									</ul>
 								</div>
 							</div>
 
@@ -370,12 +370,12 @@
 										<img data-th-src="${portal.assetUrl({'_path=/images/exampleCardsHorizontal.png'})}" class="pure-img" alt=""/>
 									</div>
 									<h3>You can look forward to...</h3>
-									<ol>
+									<ul>
 										<li>Seven activity cards a month!</li>
 										<li>Stickers and a parent's guide in your welcome pack</li>
 										<li>A special carry case with your second pack</li>
 										<li>Seeing the life-changing impact your support will have</li>
-									</ol>
+									</ul>
 								</div>
 							</div>
 
@@ -411,39 +411,44 @@
 									</fieldset>
 
 									<fieldset class="card-expiry">
-										<label for="card-expiry-month" class="field-label">Expiry month</label>
-										<select id="card-expiry-month" name="card-expiry-month">
-											<option value="1">Jan (01)</option>
-											<option value="2">Feb (02)</option>
-											<option value="3">Mar (03)</option>
-											<option value="4">Apr (04)</option>
-											<option value="5">May (05)</option>
-											<option value="6">Jun (06)</option>
-											<option value="7">Jul (07)</option>
-											<option value="8">Aug (08)</option>
-											<option value="9">Sep (09)</option>
-											<option value="10">Oct (10)</option>
-											<option value="11">Nov (11)</option>
-											<option value="12">Dec (12)</option>
-										</select>
-										/
-										<label for="card-expiry-year" class="field-label">Expiry year</label>
-										<select id="card-expiry-year" name="card-expiry-year">
-											<option value="17">2017</option>
-											<option value="18">2018</option>
-											<option value="19">2019</option>
-											<option value="20">2020</option>
-											<option value="21">2021</option>
-											<option value="22">2022</option>
-											<option value="23">2023</option>
-											<option value="24">2024</option>
-											<option value="25">2025</option>
-											<option value="26">2026</option>
-											<option value="27">2027</option>
-											<option value="28">2028</option>
-											<option value="29">2029</option>
-											<option value="30">2030</option>
-										</select>
+										<div class="pure-g">
+											<div class="pure-u-1-2">
+												<label for="card-expiry-month" class="field-label">Expiry month</label>
+												<select id="card-expiry-month" name="card-expiry-month">
+													<option value="1">Jan (01)</option>
+													<option value="2">Feb (02)</option>
+													<option value="3">Mar (03)</option>
+													<option value="4">Apr (04)</option>
+													<option value="5">May (05)</option>
+													<option value="6">Jun (06)</option>
+													<option value="7">Jul (07)</option>
+													<option value="8">Aug (08)</option>
+													<option value="9">Sep (09)</option>
+													<option value="10">Oct (10)</option>
+													<option value="11">Nov (11)</option>
+													<option value="12">Dec (12)</option>
+												</select>
+											</div>
+											<div class="pure-u-1-2">
+												<label for="card-expiry-year" class="field-label">Expiry year</label>
+												<select id="card-expiry-year" name="card-expiry-year">
+													<option value="17">2017</option>
+													<option value="18">2018</option>
+													<option value="19">2019</option>
+													<option value="20">2020</option>
+													<option value="21">2021</option>
+													<option value="22">2022</option>
+													<option value="23">2023</option>
+													<option value="24">2024</option>
+													<option value="25">2025</option>
+													<option value="26">2026</option>
+													<option value="27">2027</option>
+													<option value="28">2028</option>
+													<option value="29">2029</option>
+													<option value="30">2030</option>
+												</select>
+											</div>
+										</div>
 									</fieldset>
 
 									<fieldset>
@@ -494,7 +499,7 @@
 
 						<div class="pure-u-1 pure-u-sm-1-2 pure-hidden-xs">
 
-							<img data-th-src="${portal.assetUrl({'_path=/images/monsters/giggles/armsdown.png'})}" class="pure-img monster" alt=""/>
+							<img data-th-src="${portal.assetUrl({'_path=/images/monsters/giggles/armsdown.png'})}" class="pure-img monster" alt="" align="right"/>
 
 							<div class="pure-g look-forward">
 								<div class="pure-u-1">
@@ -502,12 +507,12 @@
 										<img data-th-src="${portal.assetUrl({'_path=/images/exampleCardsHorizontal.png'})}" class="pure-img" alt=""/>
 									</div>
 									<h3>You can look forward to...</h3>
-									<ol>
+									<ul>
 										<li>Seven activity cards a month!</li>
 										<li>Stickers and a parent's guide in your welcome pack</li>
 										<li>A special carry case with your second pack</li>
 										<li>Seeing the life-changing impact your support will have</li>
-									</ol>
+									</ul>
 								</div>
 							</div>
 
@@ -540,6 +545,28 @@
 								<button type="button" id="place-order" class="pure-button back left">Place order</button>
 							</div>
 						</div>
+
+						<div class="pure-u-1 pure-u-sm-1-2 pure-hidden-xs">
+
+							<img data-th-src="${portal.assetUrl({'_path=/images/monsters/snug/onewing.png'})}" class="pure-img monster" alt="" align="right"/>
+
+							<div class="pure-g look-forward">
+								<div class="pure-u-1">
+									<div class="imageholder">
+										<img data-th-src="${portal.assetUrl({'_path=/images/exampleCardsHorizontal.png'})}" class="pure-img" alt=""/>
+									</div>
+									<h3>You can look forward to...</h3>
+									<ul>
+										<li>Seven activity cards a month!</li>
+										<li>Stickers and a parent's guide in your welcome pack</li>
+										<li>A special carry case with your second pack</li>
+										<li>Seeing the life-changing impact your support will have</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+
 					</div>
 				</div>
 

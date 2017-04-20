@@ -490,6 +490,10 @@ $blue-border-1		    : #159fda;			//Card-like
 
 $focus					: chartreuse;
 */
+main * + * { margin-top: 1.5rem; }
+
+li, dt, dd, br, th, td { margin-top: 0; }
+
 h1, h2, h3, h4, .get-started, .testimonial-left, .testimonial-right { font-family: "Fredoka One", "Arial Black", "Arial Bold", cursive; }
 
 h1 { font-size: 1.4em; }
@@ -521,6 +525,10 @@ select#address-results, #address-form-details { max-width: 100%; display: inline
 .nobottom.questions { margin-top: 50px !important; }
 
 .promocode #show-promo-code { color: #612d87; }
+
+.pure-button.back { margin-top: 0; }
+
+.multicardholder .pure-u-1-2:last-child, .card-expiry .pure-u-1-2:last-child { margin-top: 0; }
 
 .pure-form input[type="text"], .pure-form input[type="email"], .pure-form input[type="number"] { width: 100%; }
 
@@ -603,6 +611,8 @@ p { margin: 1.5rem; font-size: 1.3rem; line-height: 1.6; color: #404040; }
 
 .monsterholder.snugone { height: 420px; margin-bottom: -400px; }
 .monsterholder.snugone:after { width: 339px; height: 395px; background: url("../images/monsters/snug/twowings.png") top 0 left 0 no-repeat; background-size: 90%; right: -170px; transform: rotate(-30deg); top: 0px; }
+
+.monster { margin-bottom: 50px; }
 
 @media only screen and (max-width: 468px) { .section-2:before { top: -16px !important; }
   .section-2 iframe { width: 300px !important; height: 180px !important; } }
@@ -764,12 +774,12 @@ ul.timeline li.timeline-current span a { color: #ffffff !important; }
 
 .pure-g .content { max-width: 60rem; margin: 0 auto; }
 .pure-g.redbg { background: url("../images/monsters/pinkfur.png") #e01954; color: #ffffff; position: relative; margin: 0; padding: 20px 0; }
-.pure-g.redbg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/pink-spikes-top.png") transparent repeat-x; background-position: 154px 0; }
-.pure-g.redbg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/pink-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 128px 0; }
+.pure-g.redbg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/pink-spikes-top.png") transparent repeat-x; background-position: 77px 0; }
+.pure-g.redbg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/pink-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 283px 0; }
 .pure-g.purplebg { background: url("../images/monsters/purplefur.png") #612d87; color: #ffffff; position: relative; margin: 0; padding: 20px 0; }
 .pure-g.purplebg p { color: white !important; }
-.pure-g.purplebg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/purple-spikes-top.png") transparent repeat-x; background-position: 318px 0; }
-.pure-g.purplebg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/purple-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 274px 0; }
+.pure-g.purplebg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/purple-spikes-top.png") transparent repeat-x; background-position: 47px 0; }
+.pure-g.purplebg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/purple-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 224px 0; }
 .pure-g.whitebg { background: #ffffff; margin: 0; padding: 20px 0; }
 .pure-g.pinkbg { background: #f5e7ec; margin: 0; padding: 20px 0; }
 .pure-g.greybg { background: #ebebeb; margin: 0; padding: 20px 0; }
@@ -823,12 +833,12 @@ h1.bubble:before { content: ''; width: 0; height: 0; border: 20px solid transpar
 #stageone .pure-g .content { overflow-x: hidden; }
 #stageone ol.group li { font-size: 0.8em !important; }
 
-#stagetwo .look-forward, #step3 .look-forward, #step4 .look-forward { width: calc(100% - 90px); margin-left: 30px; margin-top: 80px; background: #ebebeb; border-radius: 20px; padding: 30px; }
-#stagetwo .look-forward h3, #step3 .look-forward h3, #step4 .look-forward h3 { color: #612d87; }
-#stagetwo .look-forward ol, #step3 .look-forward ol, #step4 .look-forward ol { margin-left: 0; padding: 0; }
-#stagetwo .look-forward li, #step3 .look-forward li, #step4 .look-forward li { list-style: none; margin-bottom: 15px; }
-#stagetwo .look-forward li:last-child, #step3 .look-forward li:last-child, #step4 .look-forward li:last-child { margin-bottom: 0; }
-#stagetwo .look-forward .imageholder, #step3 .look-forward .imageholder, #step4 .look-forward .imageholder { width: 90%; margin: 0 auto; margin-top: -50px; }
+#stagetwo .look-forward, #step3 .look-forward, #step4 .look-forward, #step5 .look-forward { width: calc(100% - 90px); margin-left: 30px; margin-top: 80px; background: #ebebeb; border-radius: 20px; padding: 30px; }
+#stagetwo .look-forward h3, #step3 .look-forward h3, #step4 .look-forward h3, #step5 .look-forward h3 { color: #612d87; }
+#stagetwo .look-forward ol, #step3 .look-forward ol, #step4 .look-forward ol, #step5 .look-forward ol { margin-left: 1em; padding: 0; }
+#stagetwo .look-forward li, #step3 .look-forward li, #step4 .look-forward li, #step5 .look-forward li { margin-bottom: 15px; }
+#stagetwo .look-forward li:last-child, #step3 .look-forward li:last-child, #step4 .look-forward li:last-child, #step5 .look-forward li:last-child { margin-bottom: 0; }
+#stagetwo .look-forward .imageholder, #step3 .look-forward .imageholder, #step4 .look-forward .imageholder, #step5 .look-forward .imageholder { width: 90%; margin: 0 auto; margin-top: -50px; }
 
 .questions { text-align: center; font-size: .9em; }
 .questions a { color: white; font-weight: 700; }
@@ -846,7 +856,7 @@ a:hover { background: #666; }
 .promocode a:hover { color: white !important; }
 
 .sparky { position: relative; }
-.sparky:before { content: ''; width: 200px; height: 200px; background: url("../images/monsters/sparky/armsdown.png") no-repeat; transform: rotate(-90deg); background-size: cover; display: block; position: absolute; right: -70px; top: 1%; }
+.sparky:before { content: ''; width: 200px; height: 200px; background: url("../images/monsters/sparky/armsdown.png") no-repeat; transform: rotate(-90deg); background-size: cover; display: block; position: absolute; right: -70px; top: -36%; }
 
 .section-2 { padding-bottom: 50px !important; }
 
