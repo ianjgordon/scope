@@ -68,8 +68,8 @@
 													<a id="show-promo-code-alt" href="#enter-promo-code-alt">Do you have a promotion code?</a>
 													<div id="enter-promo-code-alt" style="display: none">
 														<fieldset>
-															<label for="promo-code-alt">Promotion code</label>
-															<input id="promo-code-alt" type="text" name="promo-code-alt"/>
+															<label for="promo-code-alt">Promotion code <span class="visually-hidden"> | Field to insert a promotion code if you have one.</span></label><br/>
+															<input id="promo-code-alt" type="text" name="promo-code-alt"/><br/>
 															<button type="button" id="add-promo-code-alt">Add Code</button>
 														</fieldset>
 													</div>
@@ -268,13 +268,19 @@
 									<label for="postcode-search" class="field-label">Search postcode</label>
 									<input id="postcode-search" name="postcode-search" type="text" placeholder=""/>
 									<label id="postcode-search-error" class="errormessage" style="display: none">Please provide a valid postcode</label>
-									<button type="button" id="find-address">Find address</button>
-									<span>Can't find your address</span>
-									<a id="show-address-link" href="#address-form-details">Enter it manually</a>
+									<button type="button" id="find-address" class="pure-button continue">Find address</button><br/>
 								</fieldset>
 
 								<!--THIS IS WHERE THE ADDRESS SELECT BOX WILL APPEAR-->
 								<div id="results"></div>
+
+								<div id="manualaddress">
+									<fieldset>
+										<span>Can't find your address</span>
+										<a id="show-address-link" href="#address-form-details">Enter&nbsp;it&nbsp;manually</a>
+									</fieldset>
+								</div>
+
 							</form>
 
 							<!--ADDRESS DETAILS FORM-->
@@ -324,6 +330,7 @@
 										<label id="mobile-error" class="errormessage" style="display: none">Please provide a valid UK phone number</label>
 									</fieldset>
 
+<!--
 									<fieldset>
 										<label for="check1" class="pure-checkbox">
 											<input id="check1" name="check1" type="checkbox"/>
@@ -339,6 +346,7 @@
 											You can change your communication preferences at any time.
 										</label>
 									</fieldset>
+-->
 								</div>
 
 
@@ -435,12 +443,23 @@
 										</label>
 									</fieldset>
 
+<!--
 									<fieldset>
 										<label for="card-check2" class="pure-checkbox">
 											<input id="card-check2" name="card-check2" type="checkbox"/>
 											<b>Tick here if your billing address is the same as your delivery address</b>
 										</label>
 									</fieldset>
+-->
+
+									<fieldset>
+										<label for="check2" class="pure-checkbox">
+											<input id="check2" name="check2" type="checkbox"/>
+											<b>Don't forget to tick this box</b> so we can email you about your order, send you bonus activities and tips, and tell you more about Scope's work.
+											You can change your communication preferences at any time.
+										</label>
+									</fieldset>
+
 								</div>
 
 								<div class="group">
