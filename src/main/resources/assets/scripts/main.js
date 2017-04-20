@@ -2,12 +2,21 @@ $(document).ready(function () {
 
 	// config object for calling APIs est
 	window.scConfig = {
+
+		//============ PCA DETAILS ================
 		// API key for PCA Predict address lookup
 		pcaAddressAPIKey    : 'AY29-CM18-GM19-XH93',
 		// PCA Predict Search url (finding addresses based on free text)
 		pcaSearchURL        : '//services.postcodeanywhere.co.uk/CapturePlus/Interactive/Find/v2.10/json3.ws',
 		// PCA Predict url for getting a specifi address's details
-		pcaAddressDetailsURL: '//services.postcodeanywhere.co.uk/CapturePlus/Interactive/Retrieve/v2.10/json3.ws'
+		pcaAddressDetailsURL: '//services.postcodeanywhere.co.uk/CapturePlus/Interactive/Retrieve/v2.10/json3.ws',
+
+
+		//============ APP CONFIG ================
+		// monthly plan amount
+		monthlyPlanAmount: 7.5,
+		// annual plan amount
+		annualPlanAmount : 60
 	};
 
 	// Handling form data and validation
@@ -42,16 +51,27 @@ $(document).ready(function () {
 			'confirm-email-address': false,
 
 			// promotianal checkbox
-			promo: false,
+			'opt-in': false,
 
-			// address fields
-			'street-address': false,
-			'line2'         : false,
-			'line3'         : false,
-			'city'          : false,
-			'county'        : false,
-			'postcode'      : false,
-			'mobile'        : false,
+			// gift aid accept checkbox
+			'gift-aid': false,
+
+			// delivery address fields
+			'street-address'        : false,
+			'line2'                 : false,
+			'line3'                 : false,
+			'city'                  : false,
+			'county'                : false,
+			'postcode'              : false,
+			// billing address fields
+			'billing-street-address': false,
+			'billing-line2'         : false,
+			'billing-line3'         : false,
+			'billing-city'          : false,
+			'billing-county'        : false,
+			'billing-postcode'      : false,
+			// mobile phone
+			'mobile'                : false,
 
 			// card details
 			'card-name'         : false,
@@ -71,8 +91,11 @@ $(document).ready(function () {
 						// TODO validate promo code
 						scForm.values.promoCode = value;
 						break;
-					case 'promo':
-						scForm.values.promo = value;
+					case 'opt-in':
+						scForm.values['opt-in'] = value;
+						break;
+					case 'gift-aid':
+						scForm.values['gift-aid'] = value;
 						break;
 					// In case of most form elements, just validate them and set if are valid
 					default:
@@ -84,7 +107,28 @@ $(document).ready(function () {
 						break;
 				}
 				log(scForm.values);
+
+				// update fields to show form data
+				scForm.updateSummaryFields();
 			}
+		},
+		// update information that is showing on the order summary screen (and place the information into the layout)
+		updateSummaryFields    : function () {
+			// assign extra information
+			_.assign(scForm.values, {
+				// Amount to show on summary page based on selected plan
+				amount                   : scForm.values.plan ? (scForm.values.plan === 'monthly' ? scConfig.monthlyPlanAmount : scConfig.annualPlanAmount) : '',
+				// TODO figure this out
+				'start-date'             : 'TODO',
+				'card-number-last-digits': scForm.values['card-number'] ? scForm.values['card-number'].slice(-4) : ''
+			});
+			// Fill placeholders for form values
+			_.each(scForm.values, function (value, key) {
+				var element = $('#' + key + '-holder');
+				if (element.length) {
+					element.html(value);
+				}
+			});
 		},
 		// validate a form value we are about to set
 		validateFormValue      : function (key, value) {
@@ -426,9 +470,13 @@ $(document).ready(function () {
 				});
 			});
 
-			// setting event on promo checkbox (save value to form variable)
-			$('#remember').on('change', function () {
-				scForm.setFormValue('promo', this.checked);
+			// setting event on opt-in checkbox (save value to form variable)
+			$('#opt-in').on('change', function () {
+				scForm.setFormValue('opt-in', this.checked);
+			});
+			// setting event on gift-aid checkbox (save value to form variable)
+			$('#gift-aid').on('change', function () {
+				scForm.setFormValue('gift-aid', this.checked);
 			});
 
 			$('.gotopage').on('click', function (e) {
