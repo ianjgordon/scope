@@ -1,7 +1,11 @@
+<div class="monsterholder snugone"></div>
+
 <div class="pure-g purplebg nobottom donationinfo">
     <div class="content">
-        <div class="pure-u-1-2">
+        <div class="pure-u-1">
             <h2 data-th-text="${heading}">Where will my donations go?</h2>
+        </div>
+        <div class="pure-u-1 pure-u-sm-1-2">
             <div data-th-utext="${text}">
                 <p>Sign up to Mindful Monsters, and each month you’ll hear from Scope; a charity that provides support and advice to disabled people and their families, helping to build resilience.</p>
                 <p>Stronger families mean disabled children can get the best start in life and fulfil their potential.</p>
@@ -9,6 +13,8 @@
 
             <a data-th-if="${button.text}" data-th-text="${button.text}" data-th-href="${button.url}" class="buttonlike get-started">Get started</a>
         </div>
-        <div class="pure-u-1-2  snugholder"></div>
+        <div class="pure-u-1 pure-u-sm-1-2 pure-hidden-xs snugholder">
+            
+        </div>
     </div>
 </div>
