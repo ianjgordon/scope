@@ -631,6 +631,8 @@ p { margin: 1.5rem; font-size: 1.3rem; line-height: 1.6; color: #404040; }
   #landing-page .testimonial-left { display: none !important; }
   #landing-page .testimonial-right { display: block !important; }
   #landing-page .section-2 .benefits ul li:nth-child(4), #landing-page .section-2 .benefits ul li:nth-child(5), #landing-page .section-2 .benefits ul li:last-child { padding-right: 0; }
+  #landing-page .snugholder, #landing-page .thinkyholder { display: none !important; }
+  #landing-page .monsterholder.snugone:after, #landing-page .monsterholder.sparkyone:after { content: none !important; }
   #stageone .singlecardholder { display: block !important; }
   #stageone .multicardholder { display: none !important; }
   #stageone .sparky:before { display: none !important; }
@@ -775,12 +777,12 @@ ul.timeline li.timeline-current span a { color: #ffffff !important; }
 
 .pure-g .content { max-width: 60rem; margin: 0 auto; }
 .pure-g.redbg { background: url("../images/monsters/pinkfur.png") #e01954; color: #ffffff; position: relative; margin: 0; padding: 20px 0; }
-.pure-g.redbg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/pink-spikes-top.png") transparent repeat-x; background-position: 296px 0; }
-.pure-g.redbg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/pink-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 24px 0; }
+.pure-g.redbg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/pink-spikes-top.png") transparent repeat-x; background-position: 19px 0; }
+.pure-g.redbg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/pink-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 407px 0; }
 .pure-g.purplebg { background: url("../images/monsters/purplefur.png") #612d87; color: #ffffff; position: relative; margin: 0; padding: 20px 0; }
 .pure-g.purplebg p { color: white !important; }
-.pure-g.purplebg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/purple-spikes-top.png") transparent repeat-x; background-position: 287px 0; }
-.pure-g.purplebg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/purple-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 89px 0; }
+.pure-g.purplebg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/purple-spikes-top.png") transparent repeat-x; background-position: 427px 0; }
+.pure-g.purplebg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/purple-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 493px 0; }
 .pure-g.whitebg { background: #ffffff; margin: 0; padding: 20px 0; }
 .pure-g.pinkbg { background: #f5e7ec; margin: 0; padding: 20px 0; }
 .pure-g.greybg { background: #ebebeb; margin: 0; padding: 20px 0; }
@@ -956,5 +958,8 @@ a:hover { background: #666; }
 #stageone .promocode #add-promo-code, #stageone .promocode #add-promo-code-alt { background: #666; margin: 10px 0 30px 0; border: none; color: white; padding: 5px 10px; border-radius: 5px; font-size: .8em; }
 
 #stageone a#show-promo-code, #stageone a#show-promo-code-alt { margin-left: -10px; }
+
+@media screen and (max-width: 35.5em) { .snugholder, .thinkyholder { display: none !important; }
+  .monsterholder.snugone:after, .monsterholder.sparkyone:after { content: none !important; } }
 
 /*# sourceMappingURL=style.css.map */
