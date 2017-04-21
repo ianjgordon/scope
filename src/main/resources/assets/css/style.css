@@ -717,10 +717,11 @@ footer#no-social .social { display: none; }
 footer .mm-footer-logo, footer .smaller { padding-bottom: 25px; }
 footer img.pure-img { max-width: 300px; margin: 0 auto; }
 footer .footernav { padding: 20px; }
+footer .footernav a { margin: 20px; }
 footer .footernav.two { font-size: .7em; text-align: center; }
 footer a:hover { color: white; }
 footer .scopelogo { max-height: 85px; margin: 0 auto; }
-footer .social { width: 230px; display: block; margin: 0 auto; }
+footer .social { width: 230px; display: block; margin: 0 auto; text-align: center; }
 footer .social div { display: inline; }
 footer .social .facebook img, footer .social .twitter img, footer .social .whatsapp img { width: 50px; }
 footer .social a:hover { cursor: pointer; background: transparent; }
@@ -774,12 +775,12 @@ ul.timeline li.timeline-current span a { color: #ffffff !important; }
 
 .pure-g .content { max-width: 60rem; margin: 0 auto; }
 .pure-g.redbg { background: url("../images/monsters/pinkfur.png") #e01954; color: #ffffff; position: relative; margin: 0; padding: 20px 0; }
-.pure-g.redbg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/pink-spikes-top.png") transparent repeat-x; background-position: 463px 0; }
-.pure-g.redbg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/pink-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 237px 0; }
+.pure-g.redbg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/pink-spikes-top.png") transparent repeat-x; background-position: 389px 0; }
+.pure-g.redbg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/pink-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 75px 0; }
 .pure-g.purplebg { background: url("../images/monsters/purplefur.png") #612d87; color: #ffffff; position: relative; margin: 0; padding: 20px 0; }
 .pure-g.purplebg p { color: white !important; }
-.pure-g.purplebg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/purple-spikes-top.png") transparent repeat-x; background-position: 404px 0; }
-.pure-g.purplebg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/purple-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 55px 0; }
+.pure-g.purplebg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/purple-spikes-top.png") transparent repeat-x; background-position: 139px 0; }
+.pure-g.purplebg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/purple-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 194px 0; }
 .pure-g.whitebg { background: #ffffff; margin: 0; padding: 20px 0; }
 .pure-g.pinkbg { background: #f5e7ec; margin: 0; padding: 20px 0; }
 .pure-g.greybg { background: #ebebeb; margin: 0; padding: 20px 0; }
@@ -847,7 +848,7 @@ h1.bubble:before { content: ''; width: 0; height: 0; border: 20px solid transpar
 .questions span { display: inline-block; }
 .questions span:not(.whitebubble) { margin-top: 20px; }
 
-a { padding: 8px 10px; display: inline; }
+a { padding: 8px 0; display: inline; }
 
 a:hover { background: #666; }
 
@@ -915,11 +916,13 @@ a:hover { background: #666; }
 #thankyou .cardshower .group { margin: 0 auto; }
 #thankyou h1, #thankyou h3 { margin: 1.5rem; }
 #thankyou h2 { font-size: .9em; font-family: "Muli", "Helvetica Neue", Helvetica, Verdana, sans-serif !important; margin: 1.5rem; line-height: 1.6; }
-#thankyou .sharebutton { width: calc(100% - 1.5em); box-sizing: border-box; background: rgba(0, 0, 0, 0.1); padding: 12px 55px 12px 15px !important; margin: 0 1.5rem 25px 1.5rem; font-family: "Fredoka One", "Arial Black", "Arial Bold", cursive; color: white; font-size: .8em; border-radius: 10px; cursor: pointer; box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.3), inset -5px -6px 10px rgba(0, 0, 0, 0.3); }
+#thankyou .sharebutton { width: calc(100% - 1.5em); box-sizing: border-box; background: rgba(0, 0, 0, 0.1); padding: 12px 55px 12px 15px !important; margin: 0 1.5rem 25px 1.5rem; font-family: "Fredoka One", "Arial Black", "Arial Bold", cursive; font-size: .8em; border-radius: 10px; cursor: pointer; line-height: 1.5em; box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.3), inset -5px -6px 10px rgba(0, 0, 0, 0.3); }
+#thankyou .sharebutton a { color: white; }
 #thankyou .sharebutton.facebook { background: url("../images/icons/social/facebook-bg.png") right 20px top 7px no-repeat #295396; }
 #thankyou .sharebutton.twitter { background: url("../images/icons/social/twitter-bg.png") right 10px top 7px no-repeat #159fdb; }
 #thankyou .sharebutton.whatsapp { background: url("../images/icons/social/whatsapp-bg.png") right 10px top 7px no-repeat #24d366; }
 @media screen and (max-width: 35.5em) { #thankyou .sharebutton { width: calc(100% - 3rem) !important; } }
+#thankyou h1, #thankyou h3 { color: #612d87; }
 
 #step5 h1, #step5 h2, #step5 h3 { color: #612d87; }
 #step5 h1 { margin: 1.5rem; }
