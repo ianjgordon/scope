@@ -1,0 +1,17 @@
+<div class="pure-g reasonswhy">
+    <div class="content">
+        <div class="pure-u-1">
+            <h2 data-th-text="${heading}">Why Mindful Monsters?</h2>
+        </div>
+        <div class="pure-u-1-2">
+            <ul>
+                <li data-th-each="feature : ${features}">
+                    <img data-th-if="${feature.icon}" class="reasonswhy-icon" data-th-src="${portal.imageUrl({'_id=' + feature.icon, '_scale=max(100)'})}"/>
+                    <span data-th-text="${feature.heading}">Developed by experts</span>
+                    <p data-th-utext="${portal.processHtml({'_value=' + feature.text})}">Mindful Monsters is brought to you by the charity Scope, who provide support to help build resilience in disabled people and their families.</p>
+                </li>
+            </ul>
+            <a data-th-if="${button.text}" data-th-text="${button.text}" data-th-url="${button.url}" class="buttonlike get-started">Get started</a>
+        </div>
+    </div>
+</div>

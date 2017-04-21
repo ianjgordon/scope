@@ -1,0 +1,10 @@
+<div class="pure-g section-1">
+    <div class="pure-u-1">
+        <div class="content">
+            <img data-th-src="${portal.assetUrl({'_path=/images/logo.png'})}" alt="" class="pure-img logo"/>
+            <h1><span class="visually-hidden">Mindful Monsters | </span><span data-th-text="${heading}">Fun delivered monthly!</span></h1>
+            <p data-th-if="${preface}" data-th-utext="${portal.processHtml({'_value=' + preface})}">Activity cards, monsters and all the brilliant benefits of mindfulness – in every pack!</p>
+            <a data-th-if="${button.text}" data-th-href="${button.url}" data-th-text="${button.text}" class="buttonlike get-started">Get started</a>
+        </div>
+    </div>
+</div>
