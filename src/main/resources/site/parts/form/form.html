@@ -246,13 +246,14 @@
 					</div>
 				</div>
 
+				<!--STEP 3 OF THE REGISTRATION FORM - ENTERING DELIVERY ADDRESS-->
 				<div class="form-page step3" id="step3" style="display: none">
 					<div class="pure-g">
 						<!-- ADDRESS INPUTS -->
 						<div class="pure-u-1 pure-u-sm-1-2">
 
 							<!--SEARCH POSTCODE FORM-->
-							<form class="pure-form pure-form-stacked" id="addresssearchfom">
+							<form class="pure-form pure-form-stacked" id="addresssearchform">
 
 								<h1 class="bubble">Where should we send Mindful Monsters</h1>
 
@@ -260,11 +261,13 @@
 									<label for="postcode-search" class="field-label">Search postcode</label>
 									<input id="postcode-search" name="postcode-search" type="text" placeholder=""/>
 									<label id="postcode-search-error" class="errormessage" style="display: none">Please provide a valid postcode</label>
-									<button type="button" id="find-address" class="pure-button continue">Find address</button><br/>
+									<button type="button" id="find-address" class="pure-button continue">Find address</button>
+									<br/>
 								</fieldset>
 
 								<!--THIS IS WHERE THE ADDRESS SELECT BOX WILL APPEAR-->
-								<div id="results"></div>
+								<div id="address-results-wrapper"></div>
+								<div id="address-detail-error" style="display: none">There was an error with the address search <span class="visually-hidden">Please click 'Select address' again</span></div>
 
 								<div id="manualaddress">
 									<fieldset>
@@ -357,6 +360,7 @@
 					</div>
 				</div>
 
+				<!--STEP 4 OF THE REGISTRATION FORM - ENTERING CARD DETAILS AND BILLING ADDRESS-->
 				<div class="form-page step4" id="step4" style="display: none">
 
 					<div class="pure-g">
@@ -436,13 +440,71 @@
 
 									<!--BILLING ADDRESS SAME CHECKBOX-->
 									<fieldset>
-										<label for="card-check1" class="pure-checkbox">
-											<input id="card-check1" name="card-check1" type="checkbox" checked="checked"/>
+										<label for="billing-address-same" class="pure-checkbox">
+											<input id="billing-address-same" name="billing-address-same" type="checkbox" checked="checked"/>
 											<b>Tick here if your billing address is the same as your delivery address</b>
 										</label>
 									</fieldset>
 
 
+									<!--BILLING ADDRESS FORM-->
+									<div id="billing-address-form-wrapper" style="display: none">
+										<fieldset>
+											<label for="billing-postcode-search" class="field-label">Search postcode</label>
+											<input id="billing-postcode-search" name="billing-postcode-search" type="text" placeholder=""/>
+											<label id="billing-postcode-search-error" class="errormessage" style="display: none">Please provide a valid postcode</label>
+											<button type="button" id="billing-find-address" class="pure-button continue">Find address</button>
+											<br/>
+										</fieldset>
+
+										<!--THIS IS WHERE THE BILLING ADDRESS SELECT BOX WILL APPEAR-->
+										<div id="billing-address-results-wrapper"></div>
+										<div id="billing-address-detail-error" style="display: none">There was an error with the address search <span class="visually-hidden">Please click 'Select address' again</span></div>
+
+										<!--ENTER BILLING BILLING ADDRESS MANUALLY -->
+										<div id="billing-manualaddress">
+											<fieldset>
+												<span>Can't find your address</span>
+												<a id="billing-show-address-link" href="#billing-address-form-details">Enter&nbsp;it&nbsp;manually</a>
+											</fieldset>
+										</div>
+
+										<!--BILLING ADDRESS DETAILS FORM-->
+										<div id="billing-address-form-details" style="display: none">
+											<fieldset>
+												<label for="billing-street-address" class="field-label">Street address</label>
+												<input id="billing-street-address" name="billing-street-address" type="text" placeholder="" required="required"/>
+												<label id="billing-street-address-error" class="errormessage" style="display: none">This field is mandatory</label>
+											</fieldset>
+
+											<fieldset>
+												<label for="billing-line2" class="field-label">Line 2 <span>(optional)</span></label>
+												<input id="billing-line2" name="billing-line2" type="text" placeholder=""/>
+											</fieldset>
+
+											<fieldset>
+												<label for="billing-line3" class="field-label">Line 3 <span>(optional)</span></label>
+												<input id="billing-line3" name="billing-line3" type="text" placeholder=""/>
+											</fieldset>
+
+											<fieldset>
+												<label for="billing-city" class="field-label">Town/City</label>
+												<input id="billing-city" name="billing-city" type="text" placeholder="" required="required"/>
+												<label id="billing-city-error" class="errormessage" style="display: none">This field is mandatory</label>
+											</fieldset>
+
+											<fieldset>
+												<label for="billing-county" class="field-label">County<span>(optional)</span></label>
+												<input id="billing-county" name="billing-county" type="text" placeholder=""/>
+											</fieldset>
+
+											<fieldset>
+												<label for="billing-postcode" class="field-label">Postcode</label>
+												<input id="billing-postcode" name="billing-postcode" type="text" placeholder="" required="required"/>
+												<label id="billing-postcode-error" class="errormessage" style="display: none">This field is mandatory</label>
+											</fieldset>
+										</div>
+									</div>
 
 
 									<!--OPT IN CHECKBOX-->
@@ -470,8 +532,6 @@
 								</div>
 
 							</form>
-
-
 
 
 						</div>
@@ -549,7 +609,7 @@
 									<p><span id="postcode-holder"></span></p>
 									<p><b>Phone number: </b><span id="mobile-holder"></span></p>
 								</div>
-								<div class="step">
+								<div class="step" id="payment-error">
 									<h3>Payment details</h3>
 									<div class="editbutton">
 										<a href="#step4" class="nofollow gotopage" data-page="4">Edit</a>
@@ -558,15 +618,18 @@
 									<p><b>Card name: </b> <span id="card-name-holder"></span></p>
 									<p><b>Card number: </b>&nbsp;&nbsp;&nbsp;&bull; &bull; &bull; &bull;&nbsp;&nbsp;&nbsp;&bull; &bull; &bull; &bull;&nbsp;&nbsp;&nbsp;&bull; &bull; &bull; &bull;&nbsp;&nbsp;&nbsp;<span
 											id="card-number-last-digits-holder"></span></p>
-									<p><b>Billing address: </b></p>
+									<p><b>Billing address: </b>TODO</p>
 									<p><span id="billing-street-address-holder"></span></p>
 									<p><span id="billing-line2-holder"></span></p>
 									<p><span id="billing-line3-holder"></span></p>
 									<p><span id="billing-city-holder"></span></p>
 									<p><span id="billing-county-holder"></span></p>
 									<p><span id="billing-postcode-holder"></span></p>
+									<div class="errormessage" style="display: none">
+										<!--CARD ERROR MESSAGES APPEAR HERE-->
+									</div>
 								</div>
-								<a href="/thankyou.html" id="place-order" class="buttonlike get-started">Place order<span class="visually-hidden"> Place order button</span></a>
+								<a href="#" id="place-order" class="buttonlike get-started">Place order<span class="visually-hidden"> Place order button</span></a>
 							</div>
 						</div>
 

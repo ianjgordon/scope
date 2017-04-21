@@ -1,5 +1,72 @@
 $(document).ready(function () {
 
+	var sampleSuccessRequest = [
+		{
+			"id"                     : "sub_AW3XVkFLvjEDzG",
+			"object"                 : "subscription",
+			"application_fee_percent": null,
+			"cancel_at_period_end"   : false,
+			"canceled_at"            : null,
+			"created"                : 1492779844,
+			"current_period_end"     : 1495371844,
+			"current_period_start"   : 1492779844,
+			"customer"               : "cus_AW3XreyblCfUhx",
+			"discount"               : null,
+			"ended_at"               : null,
+			"items"                  : {
+				"object"     : "list",
+				"data"       : [
+					{
+						"id"      : "si_1AB1QeImICA5mZ1cB2xQaA6G",
+						"object"  : "subscription_item",
+						"created" : 1492779844,
+						"plan"    : {
+							"id"                  : "basic-monthly",
+							"object"              : "plan",
+							"amount"              : 750,
+							"created"             : 1492776750,
+							"currency"            : "gbp",
+							"interval"            : "month",
+							"interval_count"      : 1,
+							"livemode"            : false,
+							"metadata"            : {},
+							"name"                : "Monthly Plan",
+							"statement_descriptor": null,
+							"trial_period_days"   : null
+						},
+						"quantity": 1
+					}
+				],
+				"has_more"   : false,
+				"total_count": 1,
+				"url"        : "/v1/subscription_items?subscription=sub_AW3XVkFLvjEDzG"
+			},
+			"livemode"               : false,
+			"metadata"               : {},
+			"plan"                   : {
+				"id"                  : "basic-monthly",
+				"object"              : "plan",
+				"amount"              : 750,
+				"created"             : 1492776750,
+				"currency"            : "gbp",
+				"interval"            : "month",
+				"interval_count"      : 1,
+				"livemode"            : false,
+				"metadata"            : {},
+				"name"                : "Monthly Plan",
+				"statement_descriptor": null,
+				"trial_period_days"   : null
+			},
+			"quantity"               : 1,
+			"start"                  : 1492779844,
+			"status"                 : "active",
+			"tax_percent"            : null,
+			"trial_end"              : null,
+			"trial_start"            : null
+		}
+	];
+
+
 	// config object for calling APIs est
 	window.scConfig = {
 
@@ -12,7 +79,7 @@ $(document).ready(function () {
 		pcaAddressDetailsURL: '//services.postcodeanywhere.co.uk/CapturePlus/Interactive/Retrieve/v2.10/json3.ws',
 
 
-		//============ APP CONFIG ================
+		//========== APP BUSINESS LOGIC DATA ==========
 		// monthly plan amount
 		monthlyPlanAmount: 7.5,
 		// annual plan amount
@@ -22,21 +89,29 @@ $(document).ready(function () {
 	// Handling form data and validation
 	window.scForm = {
 		// defining user form element id's to register events to
-		userFormFields       : ['first-name', 'last-name', 'email-address', 'confirm-email-address'],
-		cardFormFields       : ['card-name', 'card-number', 'card-expiry-month', 'card-expiry-year', 'card-security-code', 'card-issue-number'],
-		addressFormFields    : ['street-address', 'line2', 'line3', 'city', 'county', 'postcode', 'mobile'],
-		optionalFields       : ['line2', 'line3', 'county', 'card-issue-number'],
-		addressFormKeyMapping: {
+		userFormFields              : ['first-name', 'last-name', 'email-address', 'confirm-email-address'],
+		cardFormFields              : ['card-name', 'card-number', 'card-expiry-month', 'card-expiry-year', 'card-security-code', 'card-issue-number'],
+		addressFormFields           : ['street-address', 'line2', 'line3', 'city', 'county', 'postcode', 'mobile'],
+		optionalFields              : ['line2', 'line3', 'county', 'card-issue-number'],
+		addressFormKeyMapping       : {
 			'street-address': 'Line1',
 			'line2'         : 'Line2',
 			'line3'         : 'Line3',
 			'city'          : 'City',
 			'postcode'      : 'PostalCode'
 		},
+		billingAddressFormKeyMapping: {
+			'billing-street-address': 'Line1',
+			'billing-line2'         : 'Line2',
+			'billing-line3'         : 'Line3',
+			'billing-city'          : 'City',
+			'billing-postcode'      : 'PostalCode'
+		},
+		billingFormRequiredFields   : ['billing-street-address', 'billing-city', 'billing-postcode'],
 		// error messages
-		validationMessages   : [],
+		validationMessages          : [],
 		// form values
-		values               : {
+		values                      : {
 
 			// promo code applied
 			promoCode: false,
@@ -55,6 +130,9 @@ $(document).ready(function () {
 
 			// gift aid accept checkbox
 			'gift-aid': false,
+
+			// checkbox value representing if the billing address is the same as the delivery address previously provided
+			'billing-address-same': true,
 
 			// delivery address fields
 			'street-address'        : false,
@@ -97,6 +175,9 @@ $(document).ready(function () {
 					case 'gift-aid':
 						scForm.values['gift-aid'] = value;
 						break;
+					case 'billing-address-same':
+						scForm.values['billing-address-same'] = value;
+						break;
 					// In case of most form elements, just validate them and set if are valid
 					default:
 						if (scForm.validateFormValue(key, value)) {
@@ -106,8 +187,7 @@ $(document).ready(function () {
 						}
 						break;
 				}
-				log(scForm.values);
-
+				// log(scForm.values);
 				// update fields to show form data
 				scForm.updateSummaryFields();
 			}
@@ -291,15 +371,16 @@ $(document).ready(function () {
 			// set plan variable
 			scForm.setPlan(plan);
 		},
-		autoFillAddressForm    : function (data) {
-			$('#address-form-details').show();
-			_.each(scForm.addressFormKeyMapping, function (dataKey, elementId) {
+		autoFillAddressForm    : function (data, type) {
+			$(type === 'delivery' ? '#address-form-details' : '#billing-address-form-details').show();
+			_.each(type === 'delivery' ? scForm.addressFormKeyMapping : scForm.billingAddressFormKeyMapping, function (dataKey, elementId) {
 				$('#' + elementId).val(data[dataKey]);
 			});
 		},
-		APISearchAddresses     : function () {
-			// hide special postcode search erro message
-			$('#postcode-search-error').hide();
+		APISearchAddresses     : function (type) {
+			// hide special postcode search error message
+			$(type === 'delivery' ? '#postcode-search-error' : '#billing-postcode-search-error').hide();
+			// send request
 			$.ajax({
 				url     : scConfig.pcaSearchURL,
 				dataType: "jsonp",
@@ -307,26 +388,23 @@ $(document).ready(function () {
 					key       : scConfig.pcaAddressAPIKey,
 					searchFor : "Everything",
 					country   : 'UK',
-					searchTerm: $('#postcode-search').val()
+					searchTerm: type === 'delivery' ? $('#postcode-search').val() : $('#billing-postcode-search').val()
 				},
 				success : function (data) {
 					if (_.isEmpty(data.Items) || data.Items[0].Next !== 'Retrieve') {
 						// search error message
-						$('#postcode-search-error').show();
-						console.warn('invalid postcode provided');
+						$(type === 'delivery' ? '#postcode-search-error' : '#billing-postcode-search-error').show();
 					} else {
 						// build select box with search results
-						scForm.layout.buildSearchSelect(data.Items);
-						// set action for 'Select address' button
-						$('#select-address-result').on('click', function (e, item) {
-							scForm.APIGetAddressDetails();
-						});
+						scForm.layout.buildSearchSelect(data.Items, type);
 					}
 				}
 			});
 		},
-		APIGetAddressDetails   : function () {
-			var address = $('#address-results').val();
+		APIGetAddressDetails   : function (type) {
+			var address = $(type === 'delivery' ? '#address-results' : '#billing-address-results').val();
+			// hide special postcode search error message
+			$(type === 'delivery' ? '#address-detail-error' : '#billing-address-detail-error').hide();
 			$.ajax({
 				url     : scConfig.pcaAddressDetailsURL,
 				dataType: "jsonp",
@@ -336,25 +414,105 @@ $(document).ready(function () {
 				},
 				success : function (data) {
 					if (data.Items.length) {
-						if (data.Items[0] !== 'Error') {
-							// Fill form with data
-							scForm.autoFillAddressForm(data.Items[0]);
+						if (!data.Items || data.Items[0].Error) {
+							// search error message
+							$(type === 'delivery' ? '#postcode-search-error' : '#billing-postcode-search-error').show();
 						} else {
-							// TODO error handling
-							alert('there was an error');
+							// Fill form with data
+							scForm.autoFillAddressForm(data.Items[0], type);
 						}
 					}
 				}
 			});
+		},
+		APIPostForm            : function () {
+
+			var testFormData = {
+				"promoCode"              : false,
+				"plan"                   : "monthly",
+				"first-name"             : "Ferenc",
+				"last-name"              : "Takacs",
+				"email-address"          : "sdfklj@gmail.com",
+				"confirm-email-address"  : "sdfklj@gmail.com",
+				"opt-in"                 : false,
+				"gift-aid"               : false,
+				"billing-address-same"   : true,
+				"street-address"         : "1 Castleview Close",
+				"line2"                  : "",
+				"line3"                  : "",
+				"city"                   : "London",
+				"county"                 : "",
+				"postcode"               : "N4 2DJ",
+				"billing-street-address" : false,
+				"billing-line2"          : false,
+				"billing-line3"          : false,
+				"billing-city"           : false,
+				"billing-county"         : false,
+				"billing-postcode"       : false,
+				"mobile"                 : "",
+				"card-name"              : "Test User",
+				"card-number"            : "4242424242424242",
+				// "card-number"            : "sldkfjsdfkj",
+				"card-expiry-month"      : "1",
+				"card-expiry-year"       : "18",
+				"card-security-code"     : "234",
+				"card-issue-number"      : "",
+				"amount"                 : 7.5,
+				"start-date"             : "TODO",
+				"card-number-last-digits": "0498"
+			};
+
+			scForm.layout.clearPostErrors();
+
+			// $.ajax({
+			// 	type       : 'POST',
+			// 	url        : 'http://arubacloud.duckdns.org:3000/api/card',
+			// 	data       : JSON.stringify(testFormData),
+			// 	// data       : JSON.stringify(scForm.values),
+			// 	success    : function (data) {
+			// 		if (data.error) {
+			// 			scForm.handleStripeError(data.error);
+			// 		}
+			// 		log(data);
+			// 	},
+			// 	contentType: "application/json",
+			// 	dataType   : 'json'
+			// });
+		},
+		handleStripeError      : function (err) {
+			//TODO remove
+			// log(err.message);
+			switch (err.type) {
+				// TODO highlight card layout on summary page with error
+				case 'StripeCardError':
+					// A declined card error
+
+					break;
+				case 'StripeInvalidRequestError':
+					// Invalid parameters were supplied to Stripe's API
+					break;
+				case 'StripeAPIError':
+					// An error occurred internally with Stripe's API
+					break;
+				case 'StripeConnectionError':
+					// Some kind of error occurred during the HTTPS communication
+					break;
+				case 'StripeAuthenticationError':
+					// You probably used an incorrect API key
+					break;
+				case 'StripeRateLimitError':
+					// Too many requests hit the API too quickly
+					break;
+			}
 		}
 	};
 
 	// handling form layout (pager etc)
 	scForm.layout = {
 		// currently active form page (first by default)
-		activePage       : 1,
+		activePage              : 1,
 		// go to given form page
-		goToPage         : function (num) {
+		goToPage                : function (num) {
 			// hiding other elements
 			$('.form-page').each(function (i, elem) {
 				$(elem).hide();
@@ -383,20 +541,50 @@ $(document).ready(function () {
 			$('form :input:visible:enabled:first').focus();
 		},
 		// build Address search Results
-		buildSearchSelect: function (data) {
+		buildSearchSelect       : function (data, type) {
+			var id             = type === 'delivery' ? 'address-results' : 'billing-address-results';
+			var searchButtonId = type === 'delivery' ? 'select-address-result' : 'billing-select-address-result';
 			// Build select box with result addresses
-			var all    = $('<div></div>');
-			var select = $('<select id="address-results" name="address-results"></select>');
+			var all            = $('<div></div>');
+			var select         = $('<select id="' + id + '" name="' + id + '"></select>');
 			_.each(data, function (result) {
 				select.append($('<option value="' + result.Id + '">' + result.Text + '</option>'));
 			});
-			var butt = $('<button name="select-address-result" id="select-address-result">Select address</button>');
+			var butt = $('<button name="' + searchButtonId + '" id="' + searchButtonId + '" class="pure-button continue">Select address</button>');
 			all.append(select);
 			all.append(butt);
-			$('#results').html(all);
+			// add generated layout to the DOM
+			$('#' + id + '-wrapper').html(all);
+			// set action for newly created 'Select address' button
+			$('#' + searchButtonId).on('click', function (e, item) {
+				e.preventDefault();
+				scForm.APIGetAddressDetails(type);
+			});
+		},
+		clearPostErrors         : function () {
+
+		},
+		// show / hide extra billing address form bits PLUS add or remove required fields
+		handleBillingAddressForm: function () {
+			var handleRequiredAttributes = function (state) {
+				_.each(scForm.billingFormRequiredFields, function (key) {
+					if (state) {
+						$('#' + key).attr('required', true);
+					} else {
+						$('#' + key).removeAttr('required');
+					}
+				});
+			};
+			if (scForm.values['billing-address-same']) {
+				$('#billing-address-form-wrapper').hide();
+				handleRequiredAttributes(false);
+			} else {
+				$('#billing-address-form-wrapper').show();
+				handleRequiredAttributes(true);
+			}
 		},
 		// initializing event handlers etc
-		init             : function () {
+		init                    : function () {
 			// making step number links unclickable - (only way forward would be with buttons)
 			$('.timeline a').each(function (i, elem) {
 				$(elem).on('click', function (e) {
@@ -408,7 +596,7 @@ $(document).ready(function () {
 			$('a#show-promo-code').on('click', function (e) {
 				e.preventDefault();
 				$('#enter-promo-code').show();
-				$('#promo-code').on('keypress', function (e) {
+				$('#add-promo-code').on('keypress', function (e) {
 					if (e.which === 13) {
 						e.preventDefault();
 						scForm.setPromoCode($('#promo-code').val(), 'monthly');
@@ -419,7 +607,7 @@ $(document).ready(function () {
 			$('a#show-promo-code-alt').on('click', function (e) {
 				e.preventDefault();
 				$('#enter-promo-code-alt').show();
-				$('#promo-code-alt').on('keypress', function (e) {
+				$('#add-promo-code-alt').on('keypress', function (e) {
 					if (e.which === 13) {
 						e.preventDefault();
 						// set value to form
@@ -432,12 +620,12 @@ $(document).ready(function () {
 			$('button#add-promo-code').on('click', function (e) {
 				e.preventDefault();
 				// set form value to given attribute
-				scForm.setFormValue('promoCode', $('#promo-code').val());
+				scForm.setPromoCode($('#promo-code').val(), 'monthly');
 			});
 			$('button#add-promo-code-alt').on('click', function (e) {
 				e.preventDefault();
 				// set form value to given attribute
-				scForm.setFormValue('promoCode', $('#promo-code-alt').val());
+				scForm.setPromoCode($('#promo-code-alt').val(), 'monthly');
 			});
 
 			// setting event handlers on the 'Continue' buttons
@@ -479,6 +667,12 @@ $(document).ready(function () {
 				scForm.setFormValue('gift-aid', this.checked);
 			});
 
+			// setting action on 'billing address different' checkbox (show extra form to provide billing address)
+			$('#billing-address-same').on('change', function () {
+				scForm.setFormValue('billing-address-same', this.checked);
+				scForm.layout.handleBillingAddressForm();
+			});
+
 			$('.gotopage').on('click', function (e) {
 				e.preventDefault();
 				scForm.layout.goToPage($(this).attr('data-page'));
@@ -486,7 +680,7 @@ $(document).ready(function () {
 
 			// Searching for addresses based on given text (hopefully postcode)
 			$('#find-address').on('click', function () {
-				scForm.APISearchAddresses();
+				scForm.APISearchAddresses('delivery');
 			});
 			// Searching for addresses based on given text (hopefully postcode)
 			$('#show-address-link').on('click', function (e) {
@@ -511,9 +705,28 @@ $(document).ready(function () {
 				e.preventDefault();
 				scForm.submitCardForm();
 			});
-			$('#addresssearchfom').on('submit', function (e) {
+
+			$('#addresssearchform').on('submit', function (e) {
 				e.preventDefault();
-				scForm.APISearchAddresses();
+				scForm.APISearchAddresses('delivery');
+			});
+
+			$('#billing-postcode-search').on('keypress', function (e) {
+				if (e.which === 13) {
+					e.preventDefault();
+					scForm.APISearchAddresses('billing');
+				}
+			});
+
+			// Searching for addresses based on given text (hopefully postcode)
+			$('#billing-find-address').on('click', function (e) {
+				e.preventDefault();
+				scForm.APISearchAddresses('billing');
+			});
+
+			$('#place-order,#how').on('click', function (e) {
+				e.preventDefault();
+				scForm.APIPostForm();
 			});
 		}
 	};
