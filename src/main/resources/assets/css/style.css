@@ -717,10 +717,11 @@ footer#no-social .social { display: none; }
 footer .mm-footer-logo, footer .smaller { padding-bottom: 25px; }
 footer img.pure-img { max-width: 300px; margin: 0 auto; }
 footer .footernav { padding: 20px; }
+footer .footernav a { margin: 20px; }
 footer .footernav.two { font-size: .7em; text-align: center; }
 footer a:hover { color: white; }
 footer .scopelogo { max-height: 85px; margin: 0 auto; }
-footer .social { width: 230px; display: block; margin: 0 auto; }
+footer .social { width: 230px; display: block; margin: 0 auto; text-align: center; }
 footer .social div { display: inline; }
 footer .social .facebook img, footer .social .twitter img, footer .social .whatsapp img { width: 50px; }
 footer .social a:hover { cursor: pointer; background: transparent; }
@@ -774,12 +775,12 @@ ul.timeline li.timeline-current span a { color: #ffffff !important; }
 
 .pure-g .content { max-width: 60rem; margin: 0 auto; }
 .pure-g.redbg { background: url("../images/monsters/pinkfur.png") #e01954; color: #ffffff; position: relative; margin: 0; padding: 20px 0; }
-.pure-g.redbg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/pink-spikes-top.png") transparent repeat-x; background-position: 77px 0; }
-.pure-g.redbg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/pink-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 283px 0; }
+.pure-g.redbg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/pink-spikes-top.png") transparent repeat-x; background-position: 296px 0; }
+.pure-g.redbg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/pink-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 24px 0; }
 .pure-g.purplebg { background: url("../images/monsters/purplefur.png") #612d87; color: #ffffff; position: relative; margin: 0; padding: 20px 0; }
 .pure-g.purplebg p { color: white !important; }
-.pure-g.purplebg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/purple-spikes-top.png") transparent repeat-x; background-position: 47px 0; }
-.pure-g.purplebg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/purple-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 224px 0; }
+.pure-g.purplebg:before { content: ''; height: 21px; width: 100%; position: absolute; left: 0; top: -21px; background: url("../images/purple-spikes-top.png") transparent repeat-x; background-position: 287px 0; }
+.pure-g.purplebg:after { content: ''; height: 21px; width: 100%; position: absolute; left: 0; bottom: -21px; background: url("../images/purple-spikes-bottom.png") transparent repeat-x -50px 0; background-position: 89px 0; }
 .pure-g.whitebg { background: #ffffff; margin: 0; padding: 20px 0; }
 .pure-g.pinkbg { background: #f5e7ec; margin: 0; padding: 20px 0; }
 .pure-g.greybg { background: #ebebeb; margin: 0; padding: 20px 0; }
@@ -847,7 +848,7 @@ h1.bubble:before { content: ''; width: 0; height: 0; border: 20px solid transpar
 .questions span { display: inline-block; }
 .questions span:not(.whitebubble) { margin-top: 20px; }
 
-a { padding: 8px 10px; display: inline; }
+a { padding: 8px 0; display: inline; }
 
 a:hover { background: #666; }
 
@@ -860,25 +861,17 @@ a:hover { background: #666; }
 
 .section-2 { padding-bottom: 50px !important; }
 
-.cardsoverspill { padding-bottom: 0; position: relative; max-width: 650px; display: block; margin: -60px auto 6em auto; }
+.cardsoverspill { padding-bottom: 0; position: relative; max-width: 650px; display: block; margin: -60px auto 3em auto; }
 .cardsoverspill .cost { box-sizing: border-box; position: absolute; width: 140px; height: 140px; background: purple; text-align: center; border-radius: 60%; font-size: .8em; color: white !important; top: calc(50% - 70px); right: 0; }
 .cardsoverspill .cost p { color: white; line-height: 1.5em; }
+.cardsoverspill img { margin-right: 150px; }
 
 .packcontains { overflow-x: hidden !important; }
 
 .packcontains:after { content: ''; width: 264px; height: 243px; display: block; background: url("../images/monsters/sparky/armsupwide.png") no-repeat; position: absolute; right: 0; top: -40px; transform: rotate(-20deg); }
 
 .reasonswhy { text-align: left !important; color: #e01954; position: relative; }
-
-
-.reasonswhy li { list-style: none; position: relative; margin-bottom: 40px; }
-.reasonswhy li span { font-family: "Fredoka One", "Arial Black", "Arial Bold", cursive !important; }
-.reasonswhy li p { font-family: "Muli", "Helvetica Neue", Helvetica, Verdana, sans-serif !important !important; margin: 10px 0 0 0; }
-.reasonswhy li a:hover { color: white; }
-
-
-
-/*.reasonswhy li:nth-child(1) { list-style: none; position: relative; margin-bottom: 40px; }
+.reasonswhy li:nth-child(1) { list-style: none; position: relative; margin-bottom: 40px; }
 .reasonswhy li:nth-child(1) span { font-family: "Fredoka One", "Arial Black", "Arial Bold", cursive !important; }
 .reasonswhy li:nth-child(1) span:before { content: ''; width: 2rem; height: 2rem; position: absolute; left: -40px; top: 0px; background: url("../images/icons/experts_icon.png") no-repeat; background-size: contain; border-radius: 2rem; }
 .reasonswhy li:nth-child(1) p { font-family: "Muli", "Helvetica Neue", Helvetica, Verdana, sans-serif !important !important; margin: 10px 0 0 0; }
@@ -907,17 +900,21 @@ a:hover { background: #666; }
 .reasonswhy li:nth-child(6) span { font-family: "Fredoka One", "Arial Black", "Arial Bold", cursive !important; }
 .reasonswhy li:nth-child(6) span:before { content: ''; width: 2rem; height: 2rem; position: absolute; left: -40px; top: 0px; background: url("../images/icons/impact_icon.png") no-repeat; background-size: contain; }
 .reasonswhy li:nth-child(6) p { font-family: "Muli", "Helvetica Neue", Helvetica, Verdana, sans-serif !important !important; margin: 10px 0 0 0; }
-.reasonswhy li:nth-child(6) a:hover { color: white; }*/
+.reasonswhy li:nth-child(6) a:hover { color: white; }
 
-.reasonswhy-icon {
-  width: 2rem;
-  height: 2rem;
-  position: absolute;
-  left: -40px;
-  top: 0px;
-}
+.packcontains:after { content: none; }
 
 .carouselholder { display: none; }
+
+.section-1 .logo { margin-top: 6em; }
+
+#landing-page { margin-top: 0px; }
+
+#landing-page .nobottom.questions { margin-top: 20px !important; position: relative; }
+
+#landing-page .nobottom.questions { margin-top: 0 !important; }
+
+#landing-page .nobottom.questions:before { content: ''; height: 20px; width: 100%; background: #612d87; top: 0; }
 
 #faq h1, #faq h2 { color: #612d87; margin-left: 8px; }
 #faq .faq-header { margin: 0; padding: 0; }
@@ -932,11 +929,13 @@ a:hover { background: #666; }
 #thankyou .cardshower .group { margin: 0 auto; }
 #thankyou h1, #thankyou h3 { margin: 1.5rem; }
 #thankyou h2 { font-size: .9em; font-family: "Muli", "Helvetica Neue", Helvetica, Verdana, sans-serif !important; margin: 1.5rem; line-height: 1.6; }
-#thankyou .sharebutton { width: calc(100% - 1.5em); box-sizing: border-box; background: rgba(0, 0, 0, 0.1); padding: 12px 55px 12px 15px !important; margin: 0 1.5rem 25px 1.5rem; font-family: "Fredoka One", "Arial Black", "Arial Bold", cursive; color: white; font-size: .8em; border-radius: 10px; cursor: pointer; box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.3), inset -5px -6px 10px rgba(0, 0, 0, 0.3); }
+#thankyou .sharebutton { width: calc(100% - 1.5em); box-sizing: border-box; background: rgba(0, 0, 0, 0.1); padding: 12px 55px 12px 15px !important; margin: 0 1.5rem 25px 1.5rem; font-family: "Fredoka One", "Arial Black", "Arial Bold", cursive; font-size: .8em; border-radius: 10px; cursor: pointer; line-height: 1.5em; box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.3), inset -5px -6px 10px rgba(0, 0, 0, 0.3); }
+#thankyou .sharebutton a { color: white; }
 #thankyou .sharebutton.facebook { background: url("../images/icons/social/facebook-bg.png") right 20px top 7px no-repeat #295396; }
 #thankyou .sharebutton.twitter { background: url("../images/icons/social/twitter-bg.png") right 10px top 7px no-repeat #159fdb; }
 #thankyou .sharebutton.whatsapp { background: url("../images/icons/social/whatsapp-bg.png") right 10px top 7px no-repeat #24d366; }
 @media screen and (max-width: 35.5em) { #thankyou .sharebutton { width: calc(100% - 3rem) !important; } }
+#thankyou h1, #thankyou h3 { color: #612d87; }
 
 #step5 h1, #step5 h2, #step5 h3 { color: #612d87; }
 #step5 h1 { margin: 1.5rem; }

@@ -24,11 +24,14 @@
 
 
 <!--MAIN REGION-->
-<div data-portal-region="main">
-	<div data-th-if="${mainRegion}" data-th-each="component : ${mainRegion.components}" data-th-remove="tag">
-		<div data-portal-component="${component.path}" data-th-remove="tag"></div>
+
+<main role="main" id="main">
+	<div data-portal-region="main">
+		<div data-th-if="${mainRegion}" data-th-each="component : ${mainRegion.components}" data-th-remove="tag">
+			<div data-portal-component="${component.path}" data-th-remove="tag"></div>
+		</div>
 	</div>
-</div>
+</main>
 
 <!--FOOTER-->
 <footer>
