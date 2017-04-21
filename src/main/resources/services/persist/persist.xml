@@ -1,0 +1,7 @@
+<service>
+  <allow>
+    <principal>role:system.admin</principal>
+    <principal>role:myapp.myrole</principal>
+    <principal>role:system.everyone</principal>
+  </allow>
+</service>
