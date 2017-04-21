@@ -1,0 +1,39 @@
+<div class="pure-g purplebg carousel">
+    <div class="content packcontains">
+        <div class="pure-u-1">
+            <h2 class="centered" data-th-text="${heading}">What’s in the pack?</h2>
+            <p class="centered">Swipe right to see what you can look forward to...</p>
+            <div class="carouselholder blue">Accessible carousel mechanism to be found and placed here. <p style="color: black!important;">Maybe this will be of use:<br/><a
+                    href="https://www.w3.org/WAI/tutorials/carousels/">https://www.w3.org/WAI/tutorials/carousels/</a></p></div>
+
+            <p>Card titles and captions below:</p>
+
+            <div data-th-each="feature : ${features}" data-th-remove="tag">
+                <h3 class="centered" data-th-text="${feature.heading}">A big monster welcome!</h3>
+                <p data-th-text="${feature.text}"/>
+            </div>
+
+
+            <!--<h3 class="centered">A big monster welcome!</h3>
+            <p>In your first pack, you'll get seven exciting activity cards, some cool monster stickers and a parent's guide to Mindful Monsters.</p>
+
+            <h3 class="centered">Meet Leo's family</h3>
+            <p>Inside your parent's guide, you’ll meet Leo's family. Your donations will be supporting families like his.</p>
+
+            <h3 class="centered">Seven activity cards a month</h3>
+            <p>Your cards will cover four fun categories - concentration, relaxation, positivity and creativity.</p>
+
+            <h3 class="centered">Start your collection</h3>
+            <p>There are 84 cards to collect, so in your second pack we'll send you a collector's card case.</p>
+
+            <h3 class="centered">All the support you need</h3>
+            <p>We'll send you regular emails with tips and tricks to help you get the most out of Mindful Monsters.</p>
+
+            <h3 class="centered">Supporting Scope</h3>
+            <p>When you've got all 12 packs, we hope you will continue to support our work with disabled people and their families.</p>-->
+
+            <a data-th-if="${button.text}" href="stage1.html" class="buttonlike get-started" data-th-text="${button.text}" data-th-href="${button.url}">Get started</a>
+
+        </div>
+    </div>
+</div>

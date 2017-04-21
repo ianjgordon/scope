@@ -1,0 +1,56 @@
+<div class="pure-g redbg section-2">
+    <div class="pure-u-1">
+        <div class="pure-g arms">
+            <div class="pure-u-1">
+                <!--<iframe src="https://www.youtube.com/embed/y9Tuadjc56M" frameborder="0" allowfullscreen></iframe>-->
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <!--<div class="content">-->
+            <div class="pure-u-1">
+                <h2 data-th-text="${heading}">What is Mindful Monsters?</h2>
+            </div>
+            <!--</div>-->
+        </div>
+
+        <div class="pure-g">
+            <!--<div class="content">-->
+            <div class="pure-u-1 pure-u-md-12-24">
+                <div data-th-utext="${preface}"/>
+
+                <!--<p>Mindful Monsters is a new and exciting way to give your little ones important life skills, while spending quality time together.</p>
+                <p>Each month, you’ll get a pack of seven activity cards inspired by mindfulness, which come with all its brilliant benefits:</p>-->
+
+                <div class="testimonial-left" data-th-if="${testimonialText}">
+                    <blockquote>
+                        <p data-th-text="${testimonialText}">&ldquo; Mindfulness changes lives. It sustains kids' natural curiosity and helps them engage more deeply with others &rdquo;</p>
+                        <cite data-th-if="${testimonialName}" data-th-text="${testimonialName}">Michael Chaskalson, Leading Mindfulness Expert</cite>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="pure-u-1 pure-u-md-12-24">
+                <div class="benefits" data-th-utext="${benefits}">
+                    <!--<ul>
+                        <li data-th-each="benefit : ${benefits}">
+                        </li>
+                        <li>More resilience in day-to-day life</li>
+                        <li>Improved focus</li>
+                        <li>Better understanding of emotions</li>
+                        <li>A sense of calm</li>
+                        <li>More positive thinking – promoting kindness and gratitude</li>
+                    </ul>-->
+                </div>
+
+                <!--<div class="testimonial-right">
+                    <blockquote>
+                        <p>&ldquo; Mindfulness changes lives. It sustains kids' natural curiosity and helps them engage more deeply with others &rdquo;</p>
+                        <cite>Michael Chaskalson, Leading Mindfulness Expert</cite>
+                    </blockquote>
+                </div>-->
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+</div>

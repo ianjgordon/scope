@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+  <display-name>FP Intro</display-name>
+  <config>
+    <input type="TextLine" name="heading">
+      <label>Heading</label>
+      <occurrences minimum="1" maximum="1"/>
+      <default>Fun delivered monthly!</default>
+    </input>
+    <input name="preface" type="HtmlArea">
+      <label>Preface</label>
+    </input>
+    <item-set name="button">
+      <label>Button</label>
+      <items>
+        <inline mixin="link-button"/>
+      </items>
+      <occurrences minimum="0" maximum="1"/>
+    </item-set>
+  </config>
+</part>

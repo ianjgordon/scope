@@ -1,0 +1,36 @@
+<div class="pure-g carousel">
+    <div class="content">
+        <div class="pure-u-1">
+            <h2 class="bubble blue" data-th-text="${heading}">What do other families think?</h2>
+        </div>
+        <div class="pure-u-1">
+            <div class="carouselholder blue">Accessible carousel mechanism to be found and placed here. <p style="color: black!important;">Maybe this will be of use:<br/><a
+                    href="https://www.w3.org/WAI/tutorials/carousels/">https://www.w3.org/WAI/tutorials/carousels/</a></p></div>
+            <p>Quotes to be used in it are below:</p>
+
+
+            <div data-th-each="quote : ${quotes}" data-th-remove="tag">
+                <p data-th-text="${quote.text}">&ldquo; It's a bonding exercise and gives me and my daughter coping mechanisms &rdquo;</p>
+                <cite data-th-text="${quote.name}">Jessie, mum of one</cite>
+            </div>
+<!--
+            <p>&ldquo; It's a bonding exercise and gives me and my daughter coping mechanisms &rdquo;</p>
+            <cite>Jessie, mum of one</cite>
+
+            <p>&ldquo; I saw sides of the kids I wouldn’t usually see &rdquo;</p>
+            <cite>Joanne, mum of two</cite>
+
+            <p>&ldquo; I use activities to defuse fighting between the kids and it does work &rdquo;</p>
+            <cite>Natasha, mum of three</cite>
+
+            <p>&ldquo; Both my children love the activities and throw themselves into every one &rdquo;</p>
+            <cite>Joanne, mum of two</cite>
+
+            <p>&ldquo; For a busy mum, it’s great! &rdquo;</p>
+            <cite>Lorraine, mum of two</cite>
+
+            <p>&ldquo; I would definitely recommend it to other parents &rdquo;</p>
+            <cite>Claire, mum of one</cite>-->
+        </div>
+    </div>
+</div>

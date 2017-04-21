@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+  <display-name>FP Where will my donations go</display-name>
+  <config>
+    <input type="TextLine" name="heading">
+      <label>Heading</label>
+      <occurrences minimum="1" maximum="1"/>
+      <default>Where will my donations go?</default>
+    </input>
+    <input name="text" type="HtmlArea">
+      <label>Text</label>
+    </input>
+    <item-set name="button">
+      <label>Button</label>
+      <items>
+        <inline mixin="link-button"/>
+      </items>
+      <occurrences minimum="0" maximum="1"/>
+    </item-set>
+  </config>
+</part>

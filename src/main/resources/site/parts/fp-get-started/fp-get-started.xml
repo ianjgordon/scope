@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+  <display-name>FP Get started</display-name>
+  <config>
+    <input name="costText" type="textLine">
+      <label>Cost Text</label>
+      <default>£7.50 monthly donation</default>
+    </input>
+    <item-set name="button">
+      <label>Button</label>
+      <items>
+        <inline mixin="link-button"/>
+      </items>
+      <occurrences minimum="0" maximum="1"/>
+    </item-set>
+  </config>
+</part>

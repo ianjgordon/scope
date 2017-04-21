@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+  <display-name>FP What is</display-name>
+  <config>
+    <input type="TextLine" name="heading">
+      <label>Heading</label>
+      <occurrences minimum="1" maximum="1"/>
+      <default>What is Mindful Monsters?</default>
+    </input>
+    <input name="preface" type="HtmlArea">
+      <label>Preface</label>
+    </input>
+    <field-set name="testimonial">
+      <label>Testimonial</label>
+      <items>
+        <input type="TextLine" name="testimonialText">
+          <label>Testimonial Text</label>
+          <occurrences minimum="0" maximum="1"/>
+          <default>Mindfulness changes lives. It sustains kids' natural curiosity and helps them engage more deeply with others</default>
+        </input>
+        <input type="TextLine" name="testimonialName">
+          <label>Testimonial Name</label>
+          <occurrences minimum="0" maximum="1"/>
+          <default>Michael Chaskalson, Leading Mindfulness Expert</default>
+        </input>
+      </items>
+    </field-set>
+    <input name="benefits" type="HtmlArea">
+      <label>Benefits</label>
+    </input>
+  </config>
+</part>

@@ -1,0 +1,11 @@
+<div class="pure-g">
+    <div class="content">
+        <div class="pure-u-1 cardsoverspill">
+            <img data-th-src="${portal.assetUrl({'_path=/images/exampleCardsHorizontal.png'})}" class="pure-img" alt="An image of a smaple of four Mindful Mosters cards"/>
+            <div class="cost"><p data-th-text="${costText}">£7.50 monthly donation</p></div>
+        </div>
+        <div class="pure-u-1" data-th-if="${button.text}">
+            <a data-th-text="${button.text}" data-th-href="${button.url}" class="buttonlike get-started">Get started</a>
+        </div>
+    </div>
+</div>
