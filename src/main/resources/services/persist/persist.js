@@ -60,7 +60,12 @@ function persistData(data) {
 	    branch: "master"
 	});
 
-	var result2 = repo.delete('9acb902d-7d50-4427-a7f7-3db6e990b0c2');
+	var result2 = repo.delete('b375d517-761c-4073-a602-7929b3c6ba3f');
+
+	if (data.id !== undefined) {
+		var deleted = repo.delete(data.id);		
+		log.info('Deleted nodeId: ' + data.id);
+	};
 
 	log.info('Saving: ' + data);
 
@@ -72,6 +77,7 @@ function persistData(data) {
 
 	return res._id;
 };
+
 
 function handleGet(req) {
 
@@ -95,9 +101,15 @@ function handleGet(req) {
 	});
 
 	// http://repo.enonic.com/public/com/enonic/xp/docs/6.9.1/docs-6.9.1-libdoc.zip!/module-lib_xp_node-RepoConnection.html#query
-	var q = "_timestamp > instant('2016-10-11T14:38:54.454Z')";
-	if (req.params.email)
-		q = "_timestamp > instant('2016-10-11T14:38:54.454Z') AND scopeUser.email = '" + req.params.email + "'";
+	if (req.params.email === undefined)
+		  	return {
+    	body: {
+      		message: 'email is required'
+    	},
+    	contentType: 'application/json'
+  	};
+
+	var q = "_timestamp > instant('2016-10-11T14:38:54.454Z') AND scopeUser.email = '" + req.params.email + "'";
 
 	log.info("Using query: " + q);
 
@@ -114,7 +126,16 @@ function handleGet(req) {
 	for (var i = 0; i < result.hits.length; i++) {
 	    var node = result.hits[i];
 	    var user = repo.get(node.id);
-	    users.push(user);
+
+	    // limit thte data that gets returned to the bare minimum
+	    var userData = {
+	    	id: user._id,
+	    	email: user.scopeUser.email,
+	    	promoCode: user.promoCode,
+	    	authCode: user.authCode,
+	    	dateAdded: user.dateAdded
+	    };
+	    users.push(userData);
 	    log.info('Node ' + node.id + ' found');
 	}
 
@@ -175,7 +196,7 @@ function handlePost(req) {
 	        userStore: 'system'
 	    }
 	}, function(){
-		nodeId = persistData(json)
+		nodeId = persistData(json);
 	});
 
 	return {
